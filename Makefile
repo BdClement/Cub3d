@@ -6,13 +6,13 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/01 19:29:36 by clbernar         ###   ########.fr        #
+#    Updated: 2023/11/01 19:33:22 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## MAIN VARIABLES
 
-NAME =			cub3d
+#NAME =			cub3d
 
 CC = 			cc
 

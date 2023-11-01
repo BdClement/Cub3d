@@ -6,13 +6,13 @@
 #    By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/01 19:46:24 by bmirlico         ###   ########.fr        #
+#    Updated: 2023/11/01 19:54:58 by bmirlico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## MAIN VARIABLES
 
-#NAME =			cub3d
+NAME =			cub3d
 
 CC = 			cc
 

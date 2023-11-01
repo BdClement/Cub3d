@@ -1,14 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/01 16:36:36 by bmirlico         ###   ########.fr       */
+/*   Created: 2022/11/10 17:12:29 by bmirlico          #+#    #+#             */
+/*   Updated: 2023/05/17 18:13:57 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc/libft.h"
 
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (!dst)
+		return (0);
+	while (src[i] && i < size - 1 && size != 0)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (size != 0)
+		dst[i] = '\0';
+	return (ft_strlen(src));
+}

@@ -3,16 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+         #
+#    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/01 16:32:26 by bmirlico         ###   ########.fr        #
+#    Updated: 2023/11/01 19:10:52 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## MAIN VARIABLES
 
-NAME = 			cub3d
 
 CC = 			cc
 
@@ -39,7 +38,7 @@ MLX_DIR =		./minilibx-linux
 MLX = 			$(MLX_DIR)/libmlx.a \
 				$(MLX_DIR)/libmlx_Linux.a
 
-MLX_FLAGS =		-L$(MLX_DIR) -lmlx -lX11 -lXext 
+MLX_FLAGS =		-L$(MLX_DIR) -lmlx -lX11 -lXext
 
 ## OBJECTS
 

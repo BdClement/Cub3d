@@ -6,10 +6,11 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/01 12:20:25 by clbernar         ###   ########.fr        #
+#    Updated: 2023/11/01 13:26:41 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+## Commentaire pour voir comment les branches marchent 
 ## MAIN VARIABLES
 
 NAME = 			cub3d

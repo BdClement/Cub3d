@@ -6,7 +6,11 @@
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/02 18:59:55 by bmirlico         ###   ########.fr       */
+=======
+/*   Updated: 2023/11/02 18:53:28 by clbernar         ###   ########.fr       */
+>>>>>>> origin/Clement
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +29,7 @@
 // pre_parsing.c
 
 int	format_cub_ok(char *arg);
+int	parsing_is_ok(char *arg);
 
 int	file_exists_or_is_a_dir(char *str);
 

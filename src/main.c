@@ -6,20 +6,8 @@
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/02 19:31:07 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:32:38 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-// int	main(int argc, char **argv)
-// {
-// 	(void)argv;
-// 	if (argc != 2)
-// 		ft_printf("Error.\nThis program requires one argument.\n");
-// 	else if (!format_cub_ok(argv[1]))
-// 		ft_printf("Error.\nThe argument needs to be a .cub format.\n");
-// 	else if (!file_exists_or_is_a_dir(argv[1]))
-// 		return (1);
-// 	return (0);
-// }

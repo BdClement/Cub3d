@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/02 18:04:14 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:05:45 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	format_cub_ok(char *arg)
 	{
 		if (arg[0] == '.')
 			break ;
+//		HEY OH !!!!!!!
 		if (arg[i] == '.')
 		{
 			if (arg[i + 1] == 'c' && arg[i + 2] == 'u'

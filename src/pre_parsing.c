@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/02 18:05:45 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:07:37 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,24 @@ int	format_cub_ok(char *arg)
 		i++;
 	}
 	ft_printf("L'argument fourni n'est pas au format adequat\n");
+	ft_printf("TEST\n");
 	return (0);
 }
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	if ((!s) || (n <= 0))
+		return ;
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)s)[i] = '\0';
+		i++;
+	}
+}
+
 
 
 

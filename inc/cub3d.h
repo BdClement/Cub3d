@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/02 16:47:39 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:53:28 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # include "../minilibx-linux/mlx_int.h"
 
 int	format_cub_ok(char *arg);
+int	parsing_is_ok(char *arg);
 
 #endif

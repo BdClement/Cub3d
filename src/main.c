@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/02 17:51:43 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:23:28 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	(void)argv;
+	//Structure Parsing a creer et envoyer a parsing_is_ok
 	if (argc != 2)
-		ft_printf("Error\nThis program requires one argument\n");
-	else if (!format_cub_ok(argv[1]))
-		ft_printf("Error\nThe argument needs to be a .cub format\n");
+		ft_printf("Error.\nThis program requires one argument.\n");
+	else
+	{
+		if (!parsing_is_ok(argv[1]))
+			return (1);
+	}
 	return (0);
 }

@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/02 17:51:43 by clbernar         ###   ########.fr       */
+/*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
+/*   Updated: 2023/11/02 17:50:53 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	main(int argc, char **argv)
+// This function checks if map format is .cub or not
+int	format_cub_ok(char *arg)
 {
-	(void)argv;
-	if (argc != 2)
-		ft_printf("Error\nThis program requires one argument\n");
-	else if (!format_cub_ok(argv[1]))
-		ft_printf("Error\nThe argument needs to be a .cub format\n");
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[0] == '.')
+			break ;
+		if (arg[i] == '.')
+		{
+			if (arg[i + 1] == 'c' && arg[i + 2] == 'u'
+				&& arg[i + 3] == 'b' && arg[i + 4] == '\0')
+				return (1);
+		}
+		i++;
+	}
+	ft_printf("L'argument fourni n'est pas au format adequat\n");
 	return (0);
 }

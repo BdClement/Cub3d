@@ -6,27 +6,11 @@
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/02 18:09:02 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:21:38 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-// MESSI A VOLE LE BALLON D'OR !!!!!
-
-void	ft_bzero(void *s, size_t n)
-{
-	size_t	i;
-
-	if ((!s) || (n <= 0))
-		return ;
-	i = 0;
-	while (i < n)
-	{
-		((unsigned char *)s)[i] = '\0';
-		i++;
-	}
-}
 
 // This function checks if map format is .cub or not
 int	format_cub_ok(char *arg)
@@ -38,7 +22,6 @@ int	format_cub_ok(char *arg)
 	{
 		if (arg[0] == '.')
 			break ;
-//		HEY OH !!!!!!!
 		if (arg[i] == '.')
 		{
 			if (arg[i + 1] == 'c' && arg[i + 2] == 'u'
@@ -47,12 +30,34 @@ int	format_cub_ok(char *arg)
 		}
 		i++;
 	}
-	ft_printf("L'argument fourni n'est pas au format adequat\n");
-	ft_printf("TEST\n");
+	//ft_printf("L'argument fourni n'est pas au format adequat\n");
 	return (0);
 }
 
+/*************PARTIE BASTIEN*********************/
 
+int	file_exists_or_is_a_dir(char *str)
+{
+	int		fd;
 
-
-// HAALAND LE MERITAIT TELLEMENT !!!!!
+	fd = open(str, O_RDONLY | O_DIRECTORY);
+	if (fd >= 0)
+	{
+		printf("%s is a directory.\n", str);
+		if (close(fd) < 0)
+			exit(EXIT_FAILURE);
+		return (0);
+	}
+	fd = open(str, O_RDONLY, S_IRUSR);
+	if (fd == -1)
+	{
+		printf("%s doesn't exist or doesn't have the right permissions.\n", str);
+		return (0);
+	}
+	else
+	{
+		if (close(fd) < 0)
+			exit(EXIT_FAILURE);
+		return (1);
+	}
+}

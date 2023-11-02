@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/02 16:47:39 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:59:55 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@
 # include "../libft/inc/ft_printf.h"
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
+# include <errno.h>
+
+/*********************PRE-PARSING********************************/
+
+// pre_parsing.c
 
 int	format_cub_ok(char *arg);
+
+int	file_exists_or_is_a_dir(char *str);
 
 #endif

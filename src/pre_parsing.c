@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/02 18:01:26 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/02 18:04:14 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,7 @@ int	format_cub_ok(char *arg)
 	ft_printf("L'argument fourni n'est pas au format adequat\n");
 	return (0);
 }
+
+
+
+// HAALAND LE MERITAIT TELLEMENT !!!!!

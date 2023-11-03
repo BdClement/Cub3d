@@ -6,22 +6,103 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/11/02 19:32:35 by bmirlico         ###   ########.fr       */
-=======
-/*   Updated: 2023/11/02 19:23:36 by clbernar         ###   ########.fr       */
->>>>>>> origin/Clement
+/*   Updated: 2023/11/03 14:12:00 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+//valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	if (tab != NULL)
+	{
+		while (tab[i] != NULL)
+		{
+			free(tab[i]);
+			i++;
+		}
+		free(tab);
+	}
+}
+
+void	display_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i] != NULL)
+	{
+		ft_printf("%s", tab[i]);
+		i++;
+	}
+}
+
+// This function returns the number of lines in the file
+int	get_file_nb_line(char *arg)
+{
+	char	*tmp;
+	int		fd;
+	int		nb_line;
+
+	nb_line = 0;
+	tmp = NULL;
+	fd = open(arg, O_RDONLY);
+	if (fd == -1)
+		exit(EXIT_FAILURE);
+	tmp = get_next_line(fd);
+	while (tmp != NULL)
+	{
+		nb_line++;
+		free(tmp);
+		tmp = get_next_line(fd);
+	}
+	if (close(fd) < 0)
+		exit(EXIT_FAILURE);
+	return (nb_line);
+}
+
+// This function get the content of the file and stocks it in a char**
+void	get_file_content(char *arg)
+{
+	int		fd;
+	char	**file_content;
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	file_content = NULL;
+	tmp = NULL;
+	fd = open(arg, O_RDONLY);
+	if (fd == -1)
+		exit(EXIT_FAILURE);
+	file_content = malloc(sizeof(char *) * (get_file_nb_line(arg) + 1));
+	if (file_content == NULL)
+		exit(EXIT_FAILURE);
+	tmp = get_next_line(fd);
+	while (tmp != NULL)
+	{
+		file_content[i] = tmp;
+		tmp = get_next_line(fd);
+		i++;
+	}
+	file_content[i] = NULL;
+	display_tab(file_content);// TEST
+	free_tab(file_content);
+	if (close(fd) < 0)
+		exit(EXIT_FAILURE);
+}
 
 /*************PARTIE CLEMENT*********************/
 
 int	parsing_is_ok(char *arg)
 {
-	if (!format_cub_ok(arg))
+	if (!format_cub_ok(arg) || !file_exists_or_is_a_dir(arg))
 		return (0);
+	get_file_content(arg);
 	return (1);
 }
 

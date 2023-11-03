@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/03 19:50:47 by clbernar         ###   ########.fr       */
+/*   Created: 2023/11/03 18:33:26 by clbernar          #+#    #+#             */
+/*   Updated: 2023/11/03 18:36:33 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	main(int argc, char **argv)
+void	free_t_data(t_data *info)
 {
-	t_data	info;
-	//Structure Parsing a creer et envoyer a parsing_is_ok
-
-	if (argc != 2)
-		ft_printf("Error.\nThis program requires one argument.\n");
-	else
-	{
-		ft_printf("strncmp == %d\n", ft_strncmp("NO", "NO", 2));
-		init_t_data(&info);
-		if (!parsing_is_ok(argv[1], &info))
-			return (1);
-	}
-	return (0);
+	if (info->map != NULL)
+		free_tab(info->map);
+	if (info->north_texture != NULL)
+		free(info->north_texture);
+	if (info->south_texture != NULL)
+		free(info->south_texture);
+	if (info->east_texture != NULL)
+		free(info->east_texture);
+	if (info->west_texture != NULL)
+		free(info->west_texture);
 }

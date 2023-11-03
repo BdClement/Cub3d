@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/03 16:28:16 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/03 19:52:41 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,19 @@ char	**get_file_content(char *arg)
 
 /*************PARTIE CLEMENT*********************/
 
-int	parsing_is_ok(char *arg)
+int	parsing_is_ok(char *arg, t_data *info)
 {
 	char	**file;
 
 	if (!format_cub_ok(arg) || !file_exists_or_is_a_dir(arg))
 		return (0);
 	file = get_file_content(arg);
-	display_tab(file);// Test
+	// display_tab(file);// Test
+	if (!parsing_texture(file, info))
+	{
+		free_tab(file);
+		return (0);
+	}
 	free_tab(file);// Test
 	return (1);
 }

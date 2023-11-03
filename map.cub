@@ -1,4 +1,11 @@
-Salut
-ceci est
+
+SO ./path_to_the_south_texture
+
 un test
+SO ./path_to_the_south_texture
+
+NO ./path_to_the_north_texture
+NO ./path_to_the_north_texture
 .
+111111111
+ceci est

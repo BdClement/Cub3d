@@ -6,40 +6,12 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/03 14:12:00 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:28:16 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 //valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
-
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (tab != NULL)
-	{
-		while (tab[i] != NULL)
-		{
-			free(tab[i]);
-			i++;
-		}
-		free(tab);
-	}
-}
-
-void	display_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		ft_printf("%s", tab[i]);
-		i++;
-	}
-}
 
 // This function returns the number of lines in the file
 int	get_file_nb_line(char *arg)
@@ -66,7 +38,7 @@ int	get_file_nb_line(char *arg)
 }
 
 // This function get the content of the file and stocks it in a char**
-void	get_file_content(char *arg)
+char	**get_file_content(char *arg)
 {
 	int		fd;
 	char	**file_content;
@@ -90,19 +62,22 @@ void	get_file_content(char *arg)
 		i++;
 	}
 	file_content[i] = NULL;
-	display_tab(file_content);// TEST
-	free_tab(file_content);
 	if (close(fd) < 0)
 		exit(EXIT_FAILURE);
+	return (file_content);
 }
 
 /*************PARTIE CLEMENT*********************/
 
 int	parsing_is_ok(char *arg)
 {
+	char	**file;
+
 	if (!format_cub_ok(arg) || !file_exists_or_is_a_dir(arg))
 		return (0);
-	get_file_content(arg);
+	file = get_file_content(arg);
+	display_tab(file);// Test
+	free_tab(file);// Test
 	return (1);
 }
 

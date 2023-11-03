@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/03 14:12:04 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:24:09 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 int		format_cub_ok(char *arg);
 int		parsing_is_ok(char *arg);
-void	get_file_content(char *arg);
+char	**get_file_content(char *arg);
 int		get_file_nb_line(char *arg);
 int		file_exists_or_is_a_dir(char *str);
 void	display_tab(char **tab); // TEST

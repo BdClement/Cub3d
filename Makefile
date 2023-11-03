@@ -6,7 +6,7 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/02 17:56:46 by clbernar         ###   ########.fr        #
+#    Updated: 2023/11/03 16:28:46 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ RM_RF =			rm -rf
 
 SRC_DIR = 		./src
 
-SRCS = 			$(SRC_DIR)/main.c \
+SRCS =			$(SRC_DIR)/main.c \
 				$(SRC_DIR)/pre_parsing.c\
-				
+				$(SRC_DIR)/utils_1.c\
+
 LIBFTDIR = 		./libft
 
 LIBFT =			$(LIBFTDIR)/libft.a

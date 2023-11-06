@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/03 18:38:03 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:36:49 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	display_tab(char **tab); // TEST
 void	free_tab(char **tab);
 int		get_len_tab(char **tab);
 int		is_empty_line(char *str);
+int		overflow(const char *nptr);
 
 /********************** INITIALISATION ***********************/
 
@@ -58,7 +59,17 @@ int		file_exists_or_is_a_dir(char *str);
 
 /********************* PARSING ********************************/
 
-// parsing_texture.c
+// parsing_texture_1.c
+int		fill_data_color(char **line, t_data *info);
+int		line_format_ok(char **line, t_data *info);
+int		fill_data_ok(char **line, t_data *info);
+int		parsing_texture_line_ok(char **line, t_data *info);
 int		parsing_texture(char **file, t_data *info);
+// parsing_texture_2.c
+int		is_number(char *str);// UTILS ??
+int		check_id(char **line);
+int		already_filled(char **line, t_data *info);
+int		file_is_complete(t_data *info);
+int		fill_color(char **line, char **split, t_data *info);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:18:26 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/03 17:21:28 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:04:58 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,7 @@ void	init_t_data(t_data *info)
 	info->south_texture = NULL;
 	info->east_texture = NULL;
 	info->west_texture = NULL;
+	info->floor_color[0] = -1;
+	info->ceiling_color[0] = -1;
+	// couleur
 }

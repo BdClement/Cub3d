@@ -6,12 +6,11 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/03 19:52:41 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:08:09 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-//valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
 
 // This function returns the number of lines in the file
 int	get_file_nb_line(char *arg)
@@ -67,8 +66,9 @@ char	**get_file_content(char *arg)
 	return (file_content);
 }
 
-/*************PARTIE CLEMENT*********************/
-
+// This function contains all the parsing
+// If the format has good format and exist, it collects the file's content
+// And sends its content to be parsed
 int	parsing_is_ok(char *arg, t_data *info)
 {
 	char	**file;
@@ -76,7 +76,6 @@ int	parsing_is_ok(char *arg, t_data *info)
 	if (!format_cub_ok(arg) || !file_exists_or_is_a_dir(arg))
 		return (0);
 	file = get_file_content(arg);
-	// display_tab(file);// Test
 	if (!parsing_texture(file, info))
 	{
 		free_tab(file);
@@ -108,8 +107,7 @@ int	format_cub_ok(char *arg)
 	return (0);
 }
 
-/*************PARTIE BASTIEN*********************/
-
+// This function checks if the file exist and if it's not a directory
 int	file_exists_or_is_a_dir(char *str)
 {
 	int		fd;

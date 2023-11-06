@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:25:37 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/03 18:25:39 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:27:13 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void	display_tab(char **tab)
 	int	i;
 
 	i = 0;
-	// if (tab != NULL && tab[0] != NULL && tab[0][0] == '\0')
-	// 	ft_printf("Le tableau a afficher est NULL\n");
 	while (tab[i] != NULL)
 	{
 		ft_printf("%s", tab[i]);
@@ -71,4 +69,32 @@ int	is_empty_line(char *str)
 		i++;
 	}
 	return (1);
+}
+
+// Check if the atoi of the string is bigger than an int
+int	overflow(const char *nptr)
+{
+	long int	value;
+	int			sign;
+
+	value = 0;
+	sign = 1;
+	while (*nptr == ' ' || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+			sign = -1;
+		nptr++;
+	}
+	if (ft_strlen(nptr) == 0 || ft_isdigit(*nptr) == 0)
+		return (1);
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		value = value * 10 + (*nptr - 48);
+		nptr++;
+		if ((value * sign) > INT_MAX || (value * sign) < INT_MIN)
+			return (1);
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/03 18:37:02 by clbernar         ###   ########.fr        #
+#    Updated: 2023/11/06 17:09:21 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRC_DIR = 		./src
 SRCS =			$(SRC_DIR)/main.c \
 				$(SRC_DIR)/pre_parsing.c\
 				$(SRC_DIR)/utils_1.c\
-				$(SRC_DIR)/parsing_texture.c\
+				$(SRC_DIR)/parsing_texture_1.c\
+				$(SRC_DIR)/parsing_texture_2.c\
 				$(SRC_DIR)/init_struct.c\
 				$(SRC_DIR)/clear.c\
 

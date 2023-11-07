@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:09:51 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/06 17:37:19 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:16:18 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,10 @@ int		fill_color(char **line, char **split, t_data *info)
 			ft_printf("The color format should be an int between 0 and 255\n");
 			return (0);
 		}
-		else
-		{
-			if (!ft_strncmp(line[0], "F", 1))
-				info->floor_color[i] = ft_atoi(split[i]);
-			else if (!ft_strncmp(line[0], "C", 1))
-				info->ceiling_color[i] = ft_atoi(split[i]);
-		}
+		if (!ft_strncmp(line[0], "F", 1))
+			info->floor_color[i] = ft_atoi(split[i]);
+		else if (!ft_strncmp(line[0], "C", 1))
+			info->ceiling_color[i] = ft_atoi(split[i]);
 		i++;
 	}
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:06:06 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/06 17:36:36 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/07 18:24:28 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // This function checks the color format. If ok, it sends it to
 // the function fill_color which will do more parsing test before
 // fill data structure
+// ,,
 int	fill_data_color(char **line, t_data *info)
 {
 	char	**split;
@@ -105,7 +106,7 @@ int	parsing_texture(char **file, t_data *info)
 
 	i = 0;
 	split = NULL;
-	while (file[i])
+	while (file[i] && file[i][0] != '\0')
 	{
 		if (file[i][ft_strlen(file[i]) - 1] == '\n')
 			file[i][ft_strlen(file[i]) - 1] = '\0';
@@ -123,6 +124,7 @@ int	parsing_texture(char **file, t_data *info)
 		free_tab(split);
 		i++;
 	}
+	//ta_fontcion(i)
 	return (file_is_complete(info));
 }
 

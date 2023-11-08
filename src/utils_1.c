@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 16:25:37 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/07 17:46:30 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:54:40 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	display_tab(char **tab)
 	i = 0;
 	while (tab[i] != NULL)
 	{
-		ft_printf("%s", tab[i]);
+		ft_printf("%s\n", tab[i]);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/08 14:19:37 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:51:31 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,3 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
-// Compteur pour arriver a la map

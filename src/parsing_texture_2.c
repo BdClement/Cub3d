@@ -6,14 +6,14 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:09:51 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/08 14:15:47 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:05:18 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
 // This function check if the ID of the line is correct or not
-void	check_id(char **file, char **line, t_data *info)
+void	check_id(char **line, t_data *info)
 {
 	int	ret;
 
@@ -27,7 +27,6 @@ void	check_id(char **file, char **line, t_data *info)
 	if (ret == 0 || ft_strlen(line[0]) > 2)
 	{
 		ft_printf("Error.\nThe ID of the line's element is incorrect.\n");
-		free_tab(file);
 		free_tab(line);
 		free_t_data(info);
 		exit(EXIT_FAILURE);
@@ -36,7 +35,7 @@ void	check_id(char **file, char **line, t_data *info)
 
 // This function checks if the ID of the line has already been filled
 // If so, the file's format is not accepted by the program
-void	already_filled(char **file, char **line, t_data *info)
+void	already_filled(char **line, t_data *info)
 {
 	int	ret;
 
@@ -56,7 +55,6 @@ void	already_filled(char **file, char **line, t_data *info)
 	if (ret == 0)
 	{
 		ft_printf("Error.\nThe file contains twice the same element.\n");
-		free_tab(file);
 		free_tab(line);
 		free_t_data(info);
 		exit(EXIT_FAILURE);

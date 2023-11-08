@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:06:06 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/08 14:38:25 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:06:39 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // This function is the second part of Fill_data_color
 // It checks that only int between 0 and 255 are allowed
 // And fill data structure when everything is ok
-void	fill_color(char **color, char **line, char **file, t_data *info)
+void	fill_color(char **color, char **line, t_data *info)
 {
 	int	i;
 
@@ -26,7 +26,6 @@ void	fill_color(char **color, char **line, char **file, t_data *info)
 			|| ft_atoi(color[i]) > 255 || ft_atoi(color[i]) < 0)
 		{
 			free_tab(color);
-			free_tab(file);
 			free_tab(line);
 			free_t_data(info);
 			ft_printf("Error.\n");
@@ -46,7 +45,7 @@ void	fill_color(char **color, char **line, char **file, t_data *info)
 // the function fill_color which will do more parsing test before
 // fill data structure
 // ,,
-void	fill_data_color(char **file, char **line, t_data *info)
+void	fill_data_color(char **line, t_data *info)
 {
 	char	**color;
 	int		i;
@@ -57,18 +56,17 @@ void	fill_data_color(char **file, char **line, t_data *info)
 	if (get_len_tab(color) != 3 || comas_nb(line[1]) != 2)
 	{
 		free_tab(color);
-		free_tab(file);
 		free_tab(line);
 		free_t_data(info);
 		ft_printf("Error.\nColor format is incorrect.\n");
 		exit(EXIT_FAILURE);
 	}
-	fill_color(color, line, file, info);
+	fill_color(color, line, info);
 }
 
 // This function checks if a line contains 2 elements
 // If not, the line's format is incorrect
-void	line_format_ok(char **file, char **line, t_data *info)
+void	line_format_ok(char **line, t_data *info)
 {
 	if (get_len_tab(line) != 2)
 	{
@@ -76,7 +74,6 @@ void	line_format_ok(char **file, char **line, t_data *info)
 		ft_printf("A line only requires element's ID and its inforations.\n");
 		free_t_data(info);
 		free_tab(line);
-		free_tab(file);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -85,11 +82,11 @@ void	line_format_ok(char **file, char **line, t_data *info)
 // to be filled with the information contained by the line
 // If the line's format is ok, isn't alredady present and has a correct ID
 // It fills the structure whith the informations the program needs
-void	parsing_texture(char **file, char **line, t_data *info)
+void	parsing_texture(char **line, t_data *info)
 {
-	line_format_ok(file, line, info);
-	check_id(file, line, info);
-	already_filled(file, line, info);
+	line_format_ok(line, info);
+	check_id(line, info);
+	already_filled(line, info);
 	if (!ft_strncmp(line[0], "NO", 2))
 		info->north_texture = ft_strdup(line[1]);
 	if (!ft_strncmp(line[0], "SO", 2))
@@ -99,14 +96,14 @@ void	parsing_texture(char **file, char **line, t_data *info)
 	if (!ft_strncmp(line[0], "EA", 2))
 		info->east_texture = ft_strdup(line[1]);
 	if (!ft_strncmp(line[0], "F", 1))
-		fill_data_color(file, line, info);
+		fill_data_color(line, info);
 	if (!ft_strncmp(line[0], "C", 1))
-		fill_data_color(file, line, info);
+		fill_data_color(line, info);
 }
 
 // This function checks all le line of the file until the map
 // If the line checked is not empty and it sends it to be parsed
-void	parsing(char **file, t_data *info)
+void	parsing(t_data *info)
 {
 	int		i;
 	int		texture_parsed;
@@ -115,11 +112,11 @@ void	parsing(char **file, t_data *info)
 	i = 0;
 	texture_parsed = 0;
 	split = NULL;
-	while (file[i] && file[i][0] != '\0')
+	while (info->file[i] && info->file[i][0] != '\0')
 	{
-		if (file[i][ft_strlen(file[i]) - 1] == '\n')
-			file[i][ft_strlen(file[i]) - 1] = '\0';
-		split = ft_split(file[i], ' ');
+		if (info->file[i][ft_strlen(info->file[i]) - 1] == '\n')
+			info->file[i][ft_strlen(info->file[i]) - 1] = '\0';
+		split = ft_split(info->file[i], ' ');
 		if (split != NULL && split[0] != NULL && !is_empty_line(split[0]))
 		{
 			if (texture_parsed++ == 6)
@@ -127,10 +124,10 @@ void	parsing(char **file, t_data *info)
 				free_tab(split);
 				break ;
 			}
-			parsing_texture(file, split, info);
+			parsing_texture(split, info);
 		}
 		free_tab(split);
 		i++;
 	}
-	//Fonction parsing map qui prend i en argument
+	parsing_map(info, i);
 }

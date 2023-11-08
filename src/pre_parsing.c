@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/08 14:38:08 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:24:29 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,36 +71,45 @@ char	**get_file_content(char *arg)
 // And sends its content to be parsed
 void	parsing_is_ok(char *arg, t_data *info)
 {
-	char	**file;
-
 	format_cub_ok(arg);
 	is_existing_file(arg);
-	file = get_file_content(arg);
-	parsing(file, info);
-	file_is_complete(file, info);
-	free_tab(file);// Test
+	info->file = get_file_content(arg);
+	parsing(info);
+	// file_is_complete(file, info);// Enlever
+	// free_tab(file);// Test
 }
 
 // This function checks if map format is .cub or not
 void	format_cub_ok(char *arg)
 {
+	int	len;
+
+	len = ft_strlen(arg);
+	if (last_4_chars(arg) == 0)
+	{
+		ft_printf("Error.\nArgument's format is not as expected.\n");
+		exit(EXIT_FAILURE);
+	}
+}
+
+int	last_4_chars(char *arg)
+{
 	int	i;
 
 	i = 0;
-	while (arg[i])
-	{
-		if (arg[0] == '.')
-			break ;
-		if (arg[i] == '.')
-		{
-			if (arg[i + 1] == 'c' && arg[i + 2] == 'u'
-				&& arg[i + 3] == 'b' && arg[i + 4] == '\0')
-				return ;
-		}
+	while (arg[i] != '\0')
 		i++;
+	i--;
+	if (arg[i] == 'b' && arg[i - 1] == 'u' && arg[i - 2] == 'c'
+		&& arg[i - 3] == '.')
+	{
+		if (i >= 4 && arg[i - 4] == '/')
+			return (0);
+		else
+			return (1);
 	}
-	ft_printf("Error.\nArgument's format is not as expected.\n");
-	exit(EXIT_FAILURE);
+	else
+		return (0);
 }
 
 // This function checks if the file exist and if it's not a directory

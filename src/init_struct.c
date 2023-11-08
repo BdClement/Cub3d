@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:18:26 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/07 17:43:10 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 18:58:13 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 // This function initialize a t_data structure
 void	init_t_data(t_data *info)
 {
+	info->file = NULL;
 	info->map = NULL;
 	info->north_texture = NULL;
 	info->south_texture = NULL;

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/08 14:17:05 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:24:58 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 # include "../minilibx-linux/mlx_int.h"
 # include <errno.h>
 
+# define VALID_CHARS " 01NSWE"
+
 typedef struct s_data{
+	char	**file;
 	char	**map;
 	char	*north_texture;
 	char	*south_texture;
@@ -34,44 +37,99 @@ typedef struct s_data{
 
 // utils_1.c
 void	display_tab(char **tab); // TEST
+
 void	free_tab(char **tab);
+
 int		get_len_tab(char **tab);
+
 int		is_empty_line(char *str);
+
 int		overflow(const char *nptr);
+
 // utils_2.c
+
 int		is_number(char *str);
+
 int		comas_nb(char *str);
 
 /********************** INITIALISATION ***********************/
 
 // init_struct.c
+
 void	init_t_data(t_data *info);
 
 /********************** CLEAR ***********************/
 
 // clear.c
+
 void	free_t_data(t_data *info);
 /*********************PRE-PARSING*****************************/
 
 // pre_parsing.c
+
 void	format_cub_ok(char *arg);
+
 void	parsing_is_ok(char *arg, t_data *info);
+
 char	**get_file_content(char *arg);
+
 int		get_file_nb_line(char *arg);
+
 void	is_existing_file(char *str);
+
+int		last_4_chars(char *arg);
+
 
 /********************* PARSING ********************************/
 
 // parsing_texture_1.c
-void	fill_color(char **color, char **line, char **split, t_data *info);
-void	fill_data_color(char **file, char **line, t_data *info);
-void	line_format_ok(char **file, char **line, t_data *info);
-void	parsing_texture(char **file, char **line, t_data *info);
-void	parsing(char **file, t_data *info);
+
+void	fill_color(char **color, char **line, t_data *info);
+
+void	fill_data_color(char **line, t_data *info);
+
+void	line_format_ok(char **line, t_data *info);
+
+void	parsing_texture(char **line, t_data *info);
+
+void	parsing(t_data *info);
+
 // parsing_texture_2.c
-void	check_id(char **file, char **line, t_data *info);
-void	already_filled(char **file, char **line, t_data *info);
+
+void	check_id(char **line, t_data *info);
+
+void	already_filled(char **line, t_data *info);
+
 void	file_is_complete(char **file, t_data *info);
 
+// parsing_map_1.c @Bastien
+
+void	parsing_map(t_data *info, int j);
+
+void	fill_in_map(t_data *info, int j);
+
+void	map_is_not_last(t_data *info);
+
+void	is_incorrect_char(t_data *info);
+
+int		check_incorrect(char *str, char *check);
+
+// void	is_empty_line(char **arg, int j);
+
+// parsing_map_2.c @Bastien
+
+void	is_player(t_data *info);
+
+int		get_occurence(char *str);
+
+void	map_is_open(t_data *info);
+
+void	check_left(t_data *info, int line, int position);
+
+void	check_right(t_data *info, int line, int position);
+
+void	check_up(t_data *info, int line, int position);
+
+void	check_down(t_data *info, int line, int position);
 
 #endif

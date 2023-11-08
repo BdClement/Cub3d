@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/06 17:08:09 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 13:25:01 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,20 @@ char	**get_file_content(char *arg)
 // This function contains all the parsing
 // If the format has good format and exist, it collects the file's content
 // And sends its content to be parsed
-int	parsing_is_ok(char *arg, t_data *info)
+void	parsing_is_ok(char *arg, t_data *info)
 {
 	char	**file;
 
-	if (!format_cub_ok(arg) || !file_exists_or_is_a_dir(arg))
-		return (0);
+	format_cub_ok(arg);
+	is_existing_file(arg);
 	file = get_file_content(arg);
-	if (!parsing_texture(file, info))
-	{
-		free_tab(file);
-		return (0);
-	}
+	parsing(file, info);
+	file_is_complete(file, info);
 	free_tab(file);// Test
-	return (1);
 }
 
 // This function checks if map format is .cub or not
-int	format_cub_ok(char *arg)
+void	format_cub_ok(char *arg)
 {
 	int	i;
 
@@ -99,16 +95,17 @@ int	format_cub_ok(char *arg)
 		{
 			if (arg[i + 1] == 'c' && arg[i + 2] == 'u'
 				&& arg[i + 3] == 'b' && arg[i + 4] == '\0')
-				return (1);
+				return ;
 		}
 		i++;
 	}
 	ft_printf("Error.\nArgument's format is not as expected.\n");
-	return (0);
+	exit(EXIT_FAILURE);
+	// return (0);
 }
 
 // This function checks if the file exist and if it's not a directory
-int	file_exists_or_is_a_dir(char *str)
+void	is_existing_file(char *str)
 {
 	int		fd;
 
@@ -118,18 +115,17 @@ int	file_exists_or_is_a_dir(char *str)
 		printf("%s is a directory.\n", str);
 		if (close(fd) < 0)
 			exit(EXIT_FAILURE);
-		return (0);
+		exit(EXIT_FAILURE);
 	}
 	fd = open(str, O_RDONLY, S_IRUSR);
 	if (fd == -1)
 	{
 		printf("%s doesn't exist or doesn't have the right permissions.\n", str);
-		return (0);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		if (close(fd) < 0)
 			exit(EXIT_FAILURE);
-		return (1);
 	}
 }

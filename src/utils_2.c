@@ -1,32 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/08 14:19:37 by clbernar         ###   ########.fr       */
+/*   Created: 2023/11/08 14:15:13 by clbernar          #+#    #+#             */
+/*   Updated: 2023/11/08 14:15:51 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-//valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
 
-int	main(int argc, char **argv)
+// Counts the number of comas in a string
+int	comas_nb(char *str)
 {
-	t_data	info;
+	int	i;
+	int	comas;
 
-	if (argc != 2)
-		ft_printf("Error.\nThis program requires one argument.\n");
-	else
+	i = 0;
+	comas = 0;
+	while (str[i])
 	{
-		init_t_data(&info);
-		parsing_is_ok(argv[1], &info);
-		ft_printf("TOUT EST CARRE MA GUEULE\n");
-		free_t_data(&info);//tests
+		if (str[i] == ',')
+			comas++;
+		i++;
 	}
-	return (0);
+	return (comas);
 }
 
-// Compteur pour arriver a la map
+int	is_number(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}

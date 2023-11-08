@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/08 13:25:01 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:38:08 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	format_cub_ok(char *arg)
 	}
 	ft_printf("Error.\nArgument's format is not as expected.\n");
 	exit(EXIT_FAILURE);
-	// return (0);
 }
 
 // This function checks if the file exist and if it's not a directory

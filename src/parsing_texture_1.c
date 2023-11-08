@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:06:06 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/08 14:36:34 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:38:25 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,3 @@ void	parsing(char **file, t_data *info)
 	}
 	//Fonction parsing map qui prend i en argument
 }
-

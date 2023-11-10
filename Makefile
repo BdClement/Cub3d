@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
+#    By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/08 18:47:52 by clbernar         ###   ########.fr        #
+#    Updated: 2023/11/10 15:35:18 by bmirlico         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,13 +27,15 @@ RM_RF =			rm -rf
 SRC_DIR = 		./src
 
 SRCS =			$(SRC_DIR)/main.c \
-				$(SRC_DIR)/pre_parsing.c\
+				$(SRC_DIR)/pre_parsing_1.c\
+				$(SRC_DIR)/pre_parsing_2.c\
 				$(SRC_DIR)/utils_1.c\
 				$(SRC_DIR)/utils_2.c\
 				$(SRC_DIR)/parsing_texture_1.c\
 				$(SRC_DIR)/parsing_texture_2.c\
 				$(SRC_DIR)/parsing_map_1.c\
 				$(SRC_DIR)/parsing_map_2.c\
+				$(SRC_DIR)/parsing_map_3.c\
 				$(SRC_DIR)/init_struct.c\
 				$(SRC_DIR)/clear.c\
 

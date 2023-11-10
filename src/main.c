@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/08 18:51:31 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:37:08 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-//valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
 
 int	main(int argc, char **argv)
 {

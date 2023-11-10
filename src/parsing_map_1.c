@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:01:44 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/08 19:20:01 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:41:01 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-// TO DO
-
-//@Bastien
-// check map is last ()
-// check incorrect chars (mettre map a NULL si la ligne est egale a '\0')
-// check player
-// check open map (w/@Clement) (checker les '0' , ne doivent etre a cote d'un vide et/ou d'un espace)
-
 
 // fonction qui regroupe les fonctions de parsing ayant trait
 // exclusivement de la map (not dealing with what is before map)
@@ -69,17 +60,7 @@ void	map_is_not_last(t_data *info)
 	while (ft_strlen(info->map[i]) == 0 && info->map[i] != NULL)
 		i++;
 	if (info->map[i] != NULL)
-	{
-		if (info->map[i][0] == ' ' || info->map[i][0] == 'N'
-			|| info->map[i][0] == 'S' || info->map[i][0] == 'W'
-			|| info->map[i][0] == 'E' || info->map[i][0] == '0'
-			|| info->map[i][0] == '1')
-			printf("Error.\nThere is an empty line in the map.\n");
-		else
-			printf("Error.\nThe map is not placed in last position.\n");
-		free_t_data(info);
-		exit(EXIT_FAILURE);
-	}
+		error_map_is_not_last(info, info->map[i]);
 	else
 	{
 		while (info->map[j] != NULL)
@@ -89,6 +70,19 @@ void	map_is_not_last(t_data *info)
 			j++;
 		}
 	}
+}
+
+void	error_map_is_not_last(t_data *info, char *str)
+{
+	if (str[0] == ' ' || str[0] == 'N'
+		|| str[0] == 'S' || str[0] == 'W'
+		|| str[0] == 'E' || str[0] == '0'
+		|| str[0] == '1')
+		printf("Error.\nThere is an empty line in the map.\n");
+	else
+		printf("Error.\nThe map is not placed in last position.\n");
+	free_t_data(info);
+	exit(EXIT_FAILURE);
 }
 
 // fonction qui check s'il y des characters incorrects dans la map
@@ -108,32 +102,4 @@ void	is_incorrect_char(t_data *info)
 		}
 		i++;
 	}
-}
-
-// sous-fonction qui check si une ligne de la map contient
-// un char incorrect
-int	check_incorrect(char *str, char *check)
-{
-	int	i;
-	int	j;
-	int	count;
-
-	i = 0;
-	j = 0;
-	count = 0;
-	while (str[i] != '\0')
-	{
-		j = 0;
-		count = 0;
-		while (check[j] != '\0')
-		{
-			if (str[i] == check[j])
-				count++;
-			j++;
-		}
-		if (count == 0)
-			return (1);
-		i++;
-	}
-	return (0);
 }

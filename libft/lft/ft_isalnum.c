@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:37:08 by bmirlico         ###   ########.fr       */
+/*   Created: 2022/11/08 15:40:13 by bmirlico          #+#    #+#             */
+/*   Updated: 2023/05/17 18:17:23 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
-//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+#include "../inc/libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isalnum(int c)
 {
-	t_data	info;
-
-	if (argc != 2)
-		ft_printf("Error.\nThis program requires one argument.\n");
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else if (c >= '0' && c <= '9')
+		return (1);
 	else
-	{
-		init_t_data(&info);
-		parsing_is_ok(argv[1], &info);
-		ft_printf("TOUT EST CARRE MA GUEULE\n");
-		free_t_data(&info);//tests
-	}
-	return (0);
+		return (0);
 }

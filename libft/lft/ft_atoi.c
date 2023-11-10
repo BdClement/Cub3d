@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:37:08 by bmirlico         ###   ########.fr       */
+/*   Created: 2022/11/16 14:43:27 by bmirlico          #+#    #+#             */
+/*   Updated: 2023/05/17 18:12:43 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
-//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+#include "../inc/libft.h"
 
-int	main(int argc, char **argv)
+int	ft_atoi(const char *nptr)
 {
-	t_data	info;
+	int	i;
+	int	sign;
+	int	res;
 
-	if (argc != 2)
-		ft_printf("Error.\nThis program requires one argument.\n");
-	else
+	i = 0;
+	sign = 1;
+	res = 0;
+	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+		i++;
+	if (nptr[i] == '+' || nptr[i] == '-')
 	{
-		init_t_data(&info);
-		parsing_is_ok(argv[1], &info);
-		ft_printf("TOUT EST CARRE MA GUEULE\n");
-		free_t_data(&info);//tests
+		if (nptr[i] == '-')
+			sign *= -1;
+		i++;
 	}
-	return (0);
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		res = res * 10 + nptr[i] - 48;
+		i++;
+	}
+	return (res * sign);
 }

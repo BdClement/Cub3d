@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:37:08 by bmirlico         ###   ########.fr       */
+/*   Created: 2022/11/28 11:37:14 by bmirlico          #+#    #+#             */
+/*   Updated: 2023/05/17 18:15:55 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
-//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+#include "../inc/libft.h"
 
-int	main(int argc, char **argv)
+t_list	*ft_lstnew(void *content)
 {
-	t_data	info;
+	t_list	*new;
 
-	if (argc != 2)
-		ft_printf("Error.\nThis program requires one argument.\n");
+	new = (t_list *)malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	if (!content)
+		new->content = NULL;
 	else
-	{
-		init_t_data(&info);
-		parsing_is_ok(argv[1], &info);
-		ft_printf("TOUT EST CARRE MA GUEULE\n");
-		free_t_data(&info);//tests
-	}
-	return (0);
+		new->content = content;
+	new->next = NULL;
+	return (new);
 }

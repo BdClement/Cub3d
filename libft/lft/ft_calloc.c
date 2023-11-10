@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:37:08 by bmirlico         ###   ########.fr       */
+/*   Created: 2022/11/16 15:13:03 by bmirlico          #+#    #+#             */
+/*   Updated: 2023/05/17 18:17:29 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
-//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+#include "../inc/libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	t_data	info;
+	char	*array;
 
-	if (argc != 2)
-		ft_printf("Error.\nThis program requires one argument.\n");
-	else
-	{
-		init_t_data(&info);
-		parsing_is_ok(argv[1], &info);
-		ft_printf("TOUT EST CARRE MA GUEULE\n");
-		free_t_data(&info);//tests
-	}
-	return (0);
+	if (nmemb == 0 || size == 0)
+		return (malloc(0));
+	if (nmemb > __SIZE_MAX__ / size)
+		return (0);
+	array = malloc(nmemb * size);
+	if (!array)
+		return (NULL);
+	ft_bzero(array, nmemb * size);
+	return ((void *)array);
 }

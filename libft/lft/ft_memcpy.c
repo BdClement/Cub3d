@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:37:08 by bmirlico         ###   ########.fr       */
+/*   Created: 2022/11/09 18:29:00 by bmirlico          #+#    #+#             */
+/*   Updated: 2023/05/17 18:15:33 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
-//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+#include "../inc/libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	t_data	info;
+	unsigned char	*csrc;
+	unsigned char	*cdest;
 
-	if (argc != 2)
-		ft_printf("Error.\nThis program requires one argument.\n");
-	else
+	csrc = (unsigned char *)src;
+	cdest = (unsigned char *)dest;
+	if (!dest)
+		return (NULL);
+	while (n > 0)
 	{
-		init_t_data(&info);
-		parsing_is_ok(argv[1], &info);
-		ft_printf("TOUT EST CARRE MA GUEULE\n");
-		free_t_data(&info);//tests
+		*cdest++ = *csrc++;
+		n--;
 	}
-	return (0);
+	return (dest);
 }

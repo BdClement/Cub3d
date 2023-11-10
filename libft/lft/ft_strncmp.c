@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:37:08 by bmirlico         ###   ########.fr       */
+/*   Created: 2022/11/15 17:19:55 by bmirlico          #+#    #+#             */
+/*   Updated: 2023/05/17 18:13:39 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
-//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+#include "../inc/libft.h"
 
-int	main(int argc, char **argv)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	t_data	info;
+	size_t	i;
 
-	if (argc != 2)
-		ft_printf("Error.\nThis program requires one argument.\n");
-	else
+	i = 0;
+	while (s1[i] && s2[i] && i < n)
 	{
-		init_t_data(&info);
-		parsing_is_ok(argv[1], &info);
-		ft_printf("TOUT EST CARRE MA GUEULE\n");
-		free_t_data(&info);//tests
+		if (s1[i] != s2[i])
+			return ((const unsigned char)s1[i] - (const unsigned char)s2[i]);
+		i++;
 	}
+	if (s1[i] && i < n)
+		return ((const unsigned char)s1[i]);
+	if (s2[i] && i < n)
+		return (-(const unsigned char)s2[i]);
 	return (0);
 }

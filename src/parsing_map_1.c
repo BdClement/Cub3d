@@ -6,20 +6,11 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:01:44 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/08 19:20:01 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/14 12:41:59 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-// TO DO
-
-//@Bastien
-// check map is last ()
-// check incorrect chars (mettre map a NULL si la ligne est egale a '\0')
-// check player
-// check open map (w/@Clement) (checker les '0' , ne doivent etre a cote d'un vide et/ou d'un espace)
-
 
 // fonction qui regroupe les fonctions de parsing ayant trait
 // exclusivement de la map (not dealing with what is before map)
@@ -30,7 +21,7 @@ void	parsing_map(t_data *info, int j)
 	is_incorrect_char(info);
 	is_player(info);
 	map_is_open(info);
-	display_tab(info->map);
+	// display_tab(info->map);
 }
 
 void	fill_in_map(t_data *info, int j)

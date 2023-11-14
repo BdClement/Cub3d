@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/08 19:24:58 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:21:38 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,24 @@
 
 # define VALID_CHARS " 01NSWE"
 
+// A definir comme on le souhaite ?
+# define WINDOW_WIDTH 2304
+# define WINDOW_HEIGHT 896
+
+# define TILE_SIZE 64
+
+//CODE MOVE
+
+
+
+typedef struct	s_imge {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_imge;
+
 typedef struct s_data{
 	char	**file;
 	char	**map;
@@ -31,6 +49,9 @@ typedef struct s_data{
 	char	*west_texture;
 	int		floor_color[3];
 	int		ceiling_color[3];
+	void	*mlx;
+	void	*win;
+	t_imge	img;
 }				t_data;
 
 /********************* UTILS ********************************/
@@ -63,6 +84,8 @@ void	init_t_data(t_data *info);
 // clear.c
 
 void	free_t_data(t_data *info);
+
+int		clear(t_data *info);
 /*********************PRE-PARSING*****************************/
 
 // pre_parsing.c
@@ -78,7 +101,6 @@ int		get_file_nb_line(char *arg);
 void	is_existing_file(char *str);
 
 int		last_4_chars(char *arg);
-
 
 /********************* PARSING ********************************/
 
@@ -132,4 +154,12 @@ void	check_up(t_data *info, int line, int position);
 
 void	check_down(t_data *info, int line, int position);
 
+/********************* WINDOW ********************************/
+
+// window.c
+void	init_window(t_data *info);
+
+void	clear_window(t_data *info);
+
+void	my_mlx_pixel_put(t_imge *image, int x, int y, int color);
 #endif

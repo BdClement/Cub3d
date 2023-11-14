@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 18:33:26 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/08 19:20:23 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:55:00 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,11 @@ void	free_t_data(t_data *info)
 		free(info->east_texture);
 	if (info->west_texture != NULL)
 		free(info->west_texture);
+	clear_window(info);
+}
+
+int	clear(t_data *info)
+{
+	free_t_data(info);
+	return (0);
 }

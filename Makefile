@@ -6,7 +6,7 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/08 18:47:52 by clbernar         ###   ########.fr        #
+#    Updated: 2023/11/14 12:28:36 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS =			$(SRC_DIR)/main.c \
 				$(SRC_DIR)/parsing_map_2.c\
 				$(SRC_DIR)/init_struct.c\
 				$(SRC_DIR)/clear.c\
+				$(SRC_DIR)/window.c\
 
 LIBFTDIR = 		./libft
 

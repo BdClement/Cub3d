@@ -6,11 +6,39 @@
 /*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 02:29:37 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/08 18:33:53 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:32:34 by bmirlico         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+// sous-fonction qui check si une ligne de la map contient
+// un char incorrect
+int	check_incorrect(char *str, char *check)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	j = 0;
+	count = 0;
+	while (str[i] != '\0')
+	{
+		j = 0;
+		count = 0;
+		while (check[j] != '\0')
+		{
+			if (str[i] == check[j])
+				count++;
+			j++;
+		}
+		if (count == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 // fonction qui check le nb de players présents sur la map
 void	is_player(t_data *info)
@@ -87,53 +115,6 @@ void	check_left(t_data *info, int line, int position)
 {
 	if (position == 0
 		|| (position != 0 && info->map[line][position - 1] == ' '))
-	{
-		printf("Error.\nThe map must be surrounded by walls.\n");
-		free_t_data(info);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	check_right(t_data *info, int line, int position)
-{
-	int	len;
-
-	len = ft_strlen(info->map[line]);
-	if (position == len - 1 || (position != len - 1
-			&& info->map[line][position + 1] == ' '))
-	{
-		printf("Error.\nThe map must be surrounded by walls.\n");
-		free_t_data(info);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	check_up(t_data *info, int line, int position)
-{
-	if (line == 0 || (int)ft_strlen(info->map[line - 1]) <= position)
-	{
-		printf("Error.\nThe map must be surrounded by walls.\n");
-		free_t_data(info);
-		exit(EXIT_FAILURE);
-	}
-	else if (info->map[line - 1][position] == ' ')
-	{
-		printf("Error.\nThe map must be surrounded by walls.\n");
-		free_t_data(info);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	check_down(t_data *info, int line, int position)
-{
-	if (line == get_len_tab(info->map) - 1
-		|| (int)ft_strlen(info->map[line + 1]) <= position)
-	{
-		printf("Error.\nThe map must be surrounded by walls.\n");
-		free_t_data(info);
-		exit(EXIT_FAILURE);
-	}
-	else if (info->map[line + 1][position] == ' ')
 	{
 		printf("Error.\nThe map must be surrounded by walls.\n");
 		free_t_data(info);

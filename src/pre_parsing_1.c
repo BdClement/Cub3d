@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pre_parsing.c                                      :+:      :+:    :+:   */
+/*   pre_parsing_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/10 13:05:44 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:06:05 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,30 +108,4 @@ int	last_4_chars(char *arg)
 	}
 	else
 		return (0);
-}
-
-// This function checks if the file exist and if it's not a directory
-void	is_existing_file(char *str)
-{
-	int		fd;
-
-	fd = open(str, O_RDONLY | O_DIRECTORY);
-	if (fd >= 0)
-	{
-		printf("%s is a directory.\n", str);
-		if (close(fd) < 0)
-			exit(EXIT_FAILURE);
-		exit(EXIT_FAILURE);
-	}
-	fd = open(str, O_RDONLY, S_IRUSR);
-	if (fd == -1)
-	{
-		printf("%s doesn't exist or doesn't have the right permissions.\n", str);
-		exit(EXIT_FAILURE);
-	}
-	else
-	{
-		if (close(fd) < 0)
-			exit(EXIT_FAILURE);
-	}
 }

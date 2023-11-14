@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/14 15:21:38 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:16:31 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ typedef struct s_data{
 	t_imge	img;
 }				t_data;
 
-/********************* UTILS ********************************/
+/********************* 0.0/UTILS ********************************/
 
-// utils_1.c
+// utils_1.c @Clement
+
 void	display_tab(char **tab); // TEST
 
 void	free_tab(char **tab);
@@ -67,28 +68,31 @@ int		is_empty_line(char *str);
 
 int		overflow(const char *nptr);
 
-// utils_2.c
+// utils_2.c @Clement
 
 int		is_number(char *str);
 
 int		comas_nb(char *str);
 
-/********************** INITIALISATION ***********************/
+/********************** 0.1/INITIALISATION ***********************/
 
-// init_struct.c
+// init_struct.c @Clement
 
 void	init_t_data(t_data *info);
 
-/********************** CLEAR ***********************/
+/********************** 0.2/CLEAR ***********************/
 
-// clear.c
+// clear.c @Clement
 
 void	free_t_data(t_data *info);
 
 int		clear(t_data *info);
+
 /*********************PRE-PARSING*****************************/
 
-// pre_parsing.c
+/********************* 1.0/PRE-PARSING *****************************/
+
+// pre_parsing_1.c @Clement @Bastien
 
 void	format_cub_ok(char *arg);
 
@@ -98,13 +102,13 @@ char	**get_file_content(char *arg);
 
 int		get_file_nb_line(char *arg);
 
-void	is_existing_file(char *str);
-
 int		last_4_chars(char *arg);
 
 /********************* PARSING ********************************/
 
-// parsing_texture_1.c
+/********************* 1.1/PARSING ********************************/
+
+// parsing_texture_1.c @Clement
 
 void	fill_color(char **color, char **line, t_data *info);
 
@@ -116,7 +120,7 @@ void	parsing_texture(char **line, t_data *info);
 
 void	parsing(t_data *info);
 
-// parsing_texture_2.c
+// parsing_texture_2.c @Clement
 
 void	check_id(char **line, t_data *info);
 
@@ -132,13 +136,13 @@ void	fill_in_map(t_data *info, int j);
 
 void	map_is_not_last(t_data *info);
 
+void	error_map_is_not_last(t_data *info, char *str);
+
 void	is_incorrect_char(t_data *info);
 
-int		check_incorrect(char *str, char *check);
-
-// void	is_empty_line(char **arg, int j);
-
 // parsing_map_2.c @Bastien
+
+int		check_incorrect(char *str, char *check);
 
 void	is_player(t_data *info);
 
@@ -147,6 +151,8 @@ int		get_occurence(char *str);
 void	map_is_open(t_data *info);
 
 void	check_left(t_data *info, int line, int position);
+
+// parsing_map_3.c @Bastien
 
 void	check_right(t_data *info, int line, int position);
 
@@ -157,9 +163,11 @@ void	check_down(t_data *info, int line, int position);
 /********************* WINDOW ********************************/
 
 // window.c
+
 void	init_window(t_data *info);
 
 void	clear_window(t_data *info);
 
 void	my_mlx_pixel_put(t_imge *image, int x, int y, int color);
+
 #endif

@@ -6,13 +6,12 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/14 12:28:36 by clbernar         ###   ########.fr        #
+#    Updated: 2023/11/14 16:16:46 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ## MAIN VARIABLES
 
-NAME =			cub3d
 
 CC = 			cc
 
@@ -34,6 +33,7 @@ SRCS =			$(SRC_DIR)/main.c \
 				$(SRC_DIR)/parsing_texture_2.c\
 				$(SRC_DIR)/parsing_map_1.c\
 				$(SRC_DIR)/parsing_map_2.c\
+				$(SRC_DIR)/parsing_map_3.c\
 				$(SRC_DIR)/init_struct.c\
 				$(SRC_DIR)/clear.c\
 				$(SRC_DIR)/window.c\
@@ -44,12 +44,7 @@ LIBFT =			$(LIBFTDIR)/libft.a
 
 LIBFT_FLAGS = 	-L$(LIBFTDIR) -lft
 
-MLX_DIR =		./minilibx-linux
-
-MLX = 			$(MLX_DIR)/libmlx.a \
-				$(MLX_DIR)/libmlx_Linux.a
-
-MLX_FLAGS =		-L$(MLX_DIR) -lmlx -lX11 -lXext
+#LREADLINE_FLAGS = -lreadline
 
 ## OBJECTS
 
@@ -61,21 +56,19 @@ OBJS = 			$(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
 
 HDIR = 			./inc
 
-HD = 			$(HDIR)/cub3d.h \
+HD = 			$(HDIR)/minishell.h \
 				$(LIBFTDIR)/inc/libft.h \
 				$(LIBFTDIR)/inc/get_next_line_bonus.h \
 				$(LIBFTDIR)/inc/ft_printf.h \
-				$(MLX_DIR)/mlx.h \
-				$(MLX_DIR)/mlx_int.h
 
-INC_HD =		-I $(HDIR) -I $(LIBFTDIR)/inc -I $(MLX_DIR)
+INC_HD =		-I $(HDIR) -I $(LIBFTDIR)/inc
 
 ## RULES
 
 all:			$(NAME)
 
-$(NAME):		$(LIBFT) $(MLX) $(OBJS)
-				$(CC) $(CFLAGS) $(INC_HD) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $@
+$(NAME):		$(LIBFT) $(OBJS)
+				$(CC) $(CFLAGS) $(INC_HD) $(OBJS) $(LIBFT_FLAGS) $(LREADLINE_FLAGS) -o $@
 
 $(OBJS):		$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HD)
 				mkdir -p $(OBJ_DIR)
@@ -84,18 +77,13 @@ $(OBJS):		$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HD)
 $(LIBFT):
 				make -C $(LIBFTDIR)
 
-$(MLX):
-				make -C $(MLX_DIR)
-
 clean:
 				$(RM_RF) $(OBJ_DIR)
 				make clean -C $(LIBFTDIR)
-				make clean -C $(MLX_DIR)
 
 fclean:			clean
 				$(RM) $(NAME)
 				$(RM) $(LIBFT)
-				$(RM) $(MLX)
 
 re:				fclean all
 

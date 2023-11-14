@@ -6,13 +6,12 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/14 15:01:33 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/14 16:15:38 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-//valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
-
+//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map/test.cub
 
 int	main(int argc, char **argv)
 {

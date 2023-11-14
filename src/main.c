@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/14 16:15:38 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:31:37 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,17 @@ int	main(int argc, char **argv)
 		init_t_data(&info);
 		parsing_is_ok(argv[1], &info);
 		init_window(&info);
-		ft_printf("Sortie de init_window\n");
-		// while (game_is_running)
+		display2d_map(&info);
+		// ft_printf("Sortie de init_window\n");
+		// while (1)
 		// {
-			// detect_action();
-			// update();
-			// display();
+		// 	sleep(10);
+		// 	ft_printf("Test\n");
+		// 	// detect_action();
+		// 	// update();
+		// 	// display();
 		// }
-		// clear();
-		// free_t_data(&info);//tests
+		mlx_loop(info.mlx);
 	}
 	return (0);
 }

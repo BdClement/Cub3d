@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/14 16:16:31 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/14 19:22:17 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,10 @@ int		get_file_nb_line(char *arg);
 
 int		last_4_chars(char *arg);
 
+/********************* 2.0/PRE-PARSING *****************************/
+
+void	is_existing_file(char *str);
+
 /********************* PARSING ********************************/
 
 /********************* 1.1/PARSING ********************************/
@@ -170,4 +174,11 @@ void	clear_window(t_data *info);
 
 void	my_mlx_pixel_put(t_imge *image, int x, int y, int color);
 
+int		test(int keycode, t_data *info);
+
+/********************* DISPLAY ********************************/
+
+void	draw_tile(t_data *info, int line, int pos);
+
+void	display2d_map(t_data	*info);
 #endif

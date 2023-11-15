@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:45:42 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/15 16:13:19 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:18:40 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,37 @@ void	display_player(t_data *info)
 	}
 }
 
-int	display2d_map(t_data *info)
+int	draw(t_data *info)
+{
+	float	x_line;
+	float	y_line;
+	float	new_x;
+	float	new_y;
+	float	move_step;
+
+	// Pas sur
+	move_step = (info->player.walkDirection + info->player.turnDirection) * info->player.walkSpeed;
+	// Wall collision a faire !
+	//MAJ rotationAngle
+	info->player.rotationAngle += info->player.rotateDirection * info->player.rotationSpeed;
+	// MAJ nouvelle position du player
+	// Calcul aussi a faire pour se deplacer a droite a gauche ?
+	new_x = info->player.x + cos(info->player.rotationAngle) * move_step;
+	new_y = info->player.y + sin(info->player.rotationAngle) * move_step;
+	info->player.x = new_x;
+	info->player.y = new_y;
+	// Calcul de la ligne qui represente rotationAngle
+	x_line = info->player.x + cos(info->player.rotationAngle) * 100;
+	y_line = info->player.y + sin(info->player.rotationAngle) * 100;
+	display2d_map(info);
+	display_player(info);
+	// Draw line rotation angle
+	draw_line(info, info->player.x, info->player.y, x_line, y_line);
+	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
+	return (0);
+}
+
+void	display2d_map(t_data *info)
 {
 	int	i;
 	int	j;
@@ -85,25 +115,35 @@ int	display2d_map(t_data *info)
 		}
 		i++;
 	}
-	display_player(info);
-	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
-	return (0);
 }
 
-// void	display2d_map(t_data *info)
-// {
-// 	int	i;
-// 	int	j;
+// A Normer
+void draw_line(t_data *data, int x0, int y0, int x1, int y1)
+{
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+    int err = dx - dy;
 
-// 	i = 0;
-// 	while (info->map[i])
-// 	{
-// 		j = 0;
-// 		while (info->map[i][j])
-// 		{
-// 			draw_tile(info, i, j);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-// }
+    while (1)
+    {
+        my_mlx_pixel_put(&data->img, x0, y0, 0x00E41E07);
+
+        if (x0 == x1 && y0 == y1)
+            break;
+
+        int e2 = 2 * err;
+        if (e2 > -dy)
+        {
+            err = err - dy;
+            x0 = x0 + sx;
+        }
+
+        if (e2 < dx)
+        {
+            err = err + dx;
+            y0 = y0 + sy;
+        }
+    }
+}

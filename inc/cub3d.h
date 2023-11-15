@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/15 16:10:22 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/15 21:57:00 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # define TILE_SIZE 64
 # define PLAYER_SIZE 10
 
+// * DeltaTime pour la fluidite ?
+// # define FOV 60 * (M_PI / 180)
+// # define NB_RAYS ?
+
 # define FRONT 119
 # define BACK 115
 # define LEFT 97
@@ -40,6 +44,12 @@
 typedef struct s_player{
 	float	x;
 	float	y;
+	int		turnDirection;// -1 left 1 right
+	int		walkDirection;// -1 back 1 front
+	int		rotateDirection;// -1 r_left 1 r_right
+	float	rotationAngle;
+	float	walkSpeed;//?
+	float	rotationSpeed;
 }			t_player;
 
 typedef struct s_imge {
@@ -176,6 +186,8 @@ void	check_up(t_data *info, int line, int position);
 
 void	check_down(t_data *info, int line, int position);
 
+void	get_rotation_angle(t_data *info, char player);
+
 /********************* WINDOW ********************************/
 
 // window.c
@@ -186,18 +198,20 @@ void	clear_window(t_data *info);
 
 void	my_mlx_pixel_put(t_imge *image, int x, int y, int color);
 
-int		test(int keycode, t_data *info);
+int		key_press(int keycode, t_data *info);
 
 /********************* DISPLAY ********************************/
 
 void	draw_tile(t_data *info, int line, int pos);
 
-// void	display2d_map(t_data	*info);
+int		draw(t_data *info);
 
 int		get_color(char position);
 
-int		display2d_map(t_data *info);
+void		display2d_map(t_data *info);
 
 void	display_player(t_data *info);
+
+void	draw_line(t_data *data, int x0, int y0, int x1, int y1);
 
 #endif

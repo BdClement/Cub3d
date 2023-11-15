@@ -6,28 +6,47 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:28:41 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/15 15:20:31 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:09:35 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	test(int keycode, t_data *info)
+int	key_release(int keycode, t_data *info)
+{
+	if (keycode == FRONT)
+		info->player.walkDirection = 0;
+	else if (keycode == BACK)
+		info->player.walkDirection = 0;
+	else if (keycode == LEFT)
+		info->player.turnDirection = 0;
+	else if (keycode == RIGHT)
+		info->player.turnDirection = 0;
+	else if (keycode == R_LEFT)
+		info->player.rotateDirection = 0;
+	else if (keycode == R_RIGHT)
+		info->player.rotateDirection = 0;
+	printf("turnDirection = %d\n", info->player.turnDirection);
+	return (0);
+}
+
+int	key_press(int keycode, t_data *info)
 {
 	if (keycode == 0xFF1B)
 		clear(info);
 	if (keycode == FRONT)
-		ft_printf("W pressed\n");
+		info->player.walkDirection = 1;
 	else if (keycode == BACK)
-		ft_printf("S pressed\n");
+		info->player.walkDirection = -1;
 	else if (keycode == LEFT)
-		ft_printf("A pressed\n");
+		info->player.turnDirection = -1;
 	else if (keycode == RIGHT)
-		ft_printf("D pressed\n");
+		info->player.turnDirection = 1;
 	else if (keycode == R_LEFT)
-		ft_printf("Fleche de gauche\n");
+		info->player.rotateDirection = -1;
 	else if (keycode == R_RIGHT)
-		ft_printf("Fleche de droite\n");
+		info->player.rotateDirection = 1;
+	printf("turnDirection = %d\n", info->player.turnDirection);
 	return (0);
 }
 
@@ -38,10 +57,11 @@ void	init_window(t_data *info)
 	info->win = mlx_new_window(info->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3d");
 	mlx_hook(info->win, DestroyNotify, StructureNotifyMask, clear, info);
-	mlx_hook(info->win, KeyPress, KeyPressMask, test, info);
+	mlx_hook(info->win, KeyPress, KeyPressMask, key_press, info);
+	mlx_hook(info->win, KeyRelease, KeyReleaseMask, key_release, info);
 	info->img.img = mlx_new_image(info->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	info->img.addr = mlx_get_data_addr(info->img.img, &(info->img.bits_per_pixel), &(info->img.line_length), &(info->img.endian));
-	mlx_loop_hook(info->mlx, display2d_map, info);
+	mlx_loop_hook(info->mlx, draw, info);
 	mlx_loop(info->mlx);
 }
 

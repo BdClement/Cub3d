@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/14 19:22:17 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/15 13:27:15 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,5 +180,9 @@ int		test(int keycode, t_data *info);
 
 void	draw_tile(t_data *info, int line, int pos);
 
-void	display2d_map(t_data	*info);
+// void	display2d_map(t_data	*info);
+
+int		get_color(char position);
+
+int		display2d_map(t_data *info);
 #endif

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:45:42 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/15 13:25:13 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:13:19 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,28 @@ void	draw_tile(t_data *info, int line, int pos)
 	}
 }
 
+void	display_player(t_data *info)
+{
+	int	i;
+	int	j;
+	int	x_start;
+	int	y_start;
+
+	x_start = info->player.x -(PLAYER_SIZE / 2);
+	y_start = info->player.y - (PLAYER_SIZE / 2);
+	i = 0;
+	while (i < PLAYER_SIZE)
+	{
+		j = 0;
+		while (j < PLAYER_SIZE)
+		{
+			my_mlx_pixel_put(&info->img, x_start + i, y_start + j, 0x00E41E07);
+			j++;
+		}
+		i++;
+	}
+}
+
 int	display2d_map(t_data *info)
 {
 	int	i;
@@ -63,6 +85,7 @@ int	display2d_map(t_data *info)
 		}
 		i++;
 	}
+	display_player(info);
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 	return (0);
 }

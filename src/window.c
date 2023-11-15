@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:28:41 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/15 13:37:04 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:20:31 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,18 @@ int	test(int keycode, t_data *info)
 {
 	if (keycode == 0xFF1B)
 		clear(info);
-	if (keycode == 119)
+	if (keycode == FRONT)
 		ft_printf("W pressed\n");
-	else if (keycode == 115)
+	else if (keycode == BACK)
 		ft_printf("S pressed\n");
-	else if (keycode == 97)
+	else if (keycode == LEFT)
 		ft_printf("A pressed\n");
-	else if (keycode == 100)
+	else if (keycode == RIGHT)
 		ft_printf("D pressed\n");
-	else if (keycode == 65361)
+	else if (keycode == R_LEFT)
 		ft_printf("Fleche de gauche\n");
-	else if (keycode == 65363)
+	else if (keycode == R_RIGHT)
 		ft_printf("Fleche de droite\n");
-	// else
-	// 	ft_printf("%d\n", keycode);
 	return (0);
 }
 

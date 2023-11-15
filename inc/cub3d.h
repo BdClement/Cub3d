@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/15 13:27:15 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/15 16:10:22 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 # include <errno.h>
+# include <math.h>
 
 # define VALID_CHARS " 01NSWE"
 
@@ -27,12 +28,21 @@
 # define WINDOW_HEIGHT 896
 
 # define TILE_SIZE 64
+# define PLAYER_SIZE 10
 
-//CODE MOVE
+# define FRONT 119
+# define BACK 115
+# define LEFT 97
+# define RIGHT 100
+# define R_LEFT 65361
+# define R_RIGHT 65363
 
+typedef struct s_player{
+	float	x;
+	float	y;
+}			t_player;
 
-
-typedef struct	s_imge {
+typedef struct s_imge {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -41,17 +51,18 @@ typedef struct	s_imge {
 }				t_imge;
 
 typedef struct s_data{
-	char	**file;
-	char	**map;
-	char	*north_texture;
-	char	*south_texture;
-	char	*east_texture;
-	char	*west_texture;
-	int		floor_color[3];
-	int		ceiling_color[3];
-	void	*mlx;
-	void	*win;
-	t_imge	img;
+	char		**file;
+	char		**map;
+	char		*north_texture;
+	char		*south_texture;
+	char		*east_texture;
+	char		*west_texture;
+	int			floor_color[3];
+	int			ceiling_color[3];
+	void		*mlx;
+	void		*win;
+	t_imge		img;
+	t_player	player;
 }				t_data;
 
 /********************* 0.0/UTILS ********************************/
@@ -150,7 +161,8 @@ int		check_incorrect(char *str, char *check);
 
 void	is_player(t_data *info);
 
-int		get_occurence(char *str);
+// int		get_occurence(char *str);
+int		get_occurence(t_data *info, int line);
 
 void	map_is_open(t_data *info);
 
@@ -185,4 +197,7 @@ void	draw_tile(t_data *info, int line, int pos);
 int		get_color(char position);
 
 int		display2d_map(t_data *info);
+
+void	display_player(t_data *info);
+
 #endif

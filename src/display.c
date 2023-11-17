@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:45:42 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/15 22:18:40 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:50:32 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,22 @@ int	draw(t_data *info)
 	info->player.rotationAngle += info->player.rotateDirection * info->player.rotationSpeed;
 	// MAJ nouvelle position du player
 	// Calcul aussi a faire pour se deplacer a droite a gauche ?
-	new_x = info->player.x + cos(info->player.rotationAngle) * move_step;
-	new_y = info->player.y + sin(info->player.rotationAngle) * move_step;
-	info->player.x = new_x;
-	info->player.y = new_y;
+	if (info->player.walkDirection != 0)
+	{
+		new_x = info->player.x + cos(info->player.rotationAngle) * move_step;
+		new_y = info->player.y + sin(info->player.rotationAngle) * move_step;
+		info->player.x = new_x;
+		info->player.y = new_y;
+	}
+	else if (info->player.turnDirection != 0)
+	{
+		new_x = info->player.x + cos(info->player.rotationAngle + M_PI_2) * move_step;
+		new_y = info->player.y + sin(info->player.rotationAngle + M_PI_2) * move_step;
+		info->player.x = new_x;
+		info->player.y = new_y;
+	}
+	// info->player.x = new_x;
+	// info->player.y = new_y;
 	// Calcul de la ligne qui represente rotationAngle
 	x_line = info->player.x + cos(info->player.rotationAngle) * 100;
 	y_line = info->player.y + sin(info->player.rotationAngle) * 100;

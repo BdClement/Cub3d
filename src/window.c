@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:28:41 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/15 22:09:35 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/17 12:42:02 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	key_release(int keycode, t_data *info)
 		info->player.rotateDirection = 0;
 	else if (keycode == R_RIGHT)
 		info->player.rotateDirection = 0;
-	printf("turnDirection = %d\n", info->player.turnDirection);
+	// printf("turnDirection = %d\n", info->player.turnDirection);
 	return (0);
 }
 
@@ -46,7 +46,7 @@ int	key_press(int keycode, t_data *info)
 		info->player.rotateDirection = -1;
 	else if (keycode == R_RIGHT)
 		info->player.rotateDirection = 1;
-	printf("turnDirection = %d\n", info->player.turnDirection);
+	// printf("turnDirection = %d\n", info->player.turnDirection);
 	return (0);
 }
 

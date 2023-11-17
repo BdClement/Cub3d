@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 18:33:26 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/15 13:04:04 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:31:49 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,11 @@ void	free_t_data(t_data *info)
 		free(info->east_texture);
 	if (info->west_texture != NULL)
 		free(info->west_texture);
-	// conditionne pour sortir proprement lors d'une erreur parsing
-	clear_window(info);
 }
 
 int	clear(t_data *info)
 {
 	free_t_data(info);
+	clear_window(info);
 	return (0);
 }

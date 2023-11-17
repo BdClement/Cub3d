@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:28:41 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/17 12:42:02 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:47:04 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	key_release(int keycode, t_data *info)
 		info->player.rotateDirection = 0;
 	else if (keycode == R_RIGHT)
 		info->player.rotateDirection = 0;
-	// printf("turnDirection = %d\n", info->player.turnDirection);
 	return (0);
 }
 
@@ -46,7 +45,6 @@ int	key_press(int keycode, t_data *info)
 		info->player.rotateDirection = -1;
 	else if (keycode == R_RIGHT)
 		info->player.rotateDirection = 1;
-	// printf("turnDirection = %d\n", info->player.turnDirection);
 	return (0);
 }
 
@@ -60,7 +58,9 @@ void	init_window(t_data *info)
 	mlx_hook(info->win, KeyPress, KeyPressMask, key_press, info);
 	mlx_hook(info->win, KeyRelease, KeyReleaseMask, key_release, info);
 	info->img.img = mlx_new_image(info->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	info->img.addr = mlx_get_data_addr(info->img.img, &(info->img.bits_per_pixel), &(info->img.line_length), &(info->img.endian));
+	info->img.addr = mlx_get_data_addr(info->img.img,
+			&(info->img.bits_per_pixel), &(info->img.line_length),
+			&(info->img.endian));
 	mlx_loop_hook(info->mlx, draw, info);
 	mlx_loop(info->mlx);
 }
@@ -72,7 +72,7 @@ void	clear_window(t_data *info)
 	mlx_destroy_window(info->mlx, info->win);
 	mlx_destroy_display(info->mlx);
 	free(info->mlx);
-	exit(EXIT_SUCCESS);// Pourquoi ??
+	exit(EXIT_SUCCESS);
 	// Tester sinon EXIT_FAILURE
 }
 
@@ -80,6 +80,7 @@ void	my_mlx_pixel_put(t_imge *image, int x, int y, int color)
 {
 	char	*img;
 
-	img = image->addr + (y * image->line_length + x * (image->bits_per_pixel / 8));
+	img = image->addr + (y * image->line_length
+			+ x * (image->bits_per_pixel / 8));
 	*(unsigned int *)img = color;
 }

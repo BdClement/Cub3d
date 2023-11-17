@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 02:29:37 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/15 22:08:18 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:41:02 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,7 @@ int	get_occurence(t_data *info, int line)
 		if (info->map[line][i] == 'N' || info->map[line][i] == 'S'
 			|| info->map[line][i] == 'W' || info->map[line][i] == 'E')
 		{
-			// A regrouper en une fonction ?
-			info->player.x = i * TILE_SIZE + (TILE_SIZE / 2);
-			info->player.y = line * TILE_SIZE + (TILE_SIZE / 2);
-			get_rotation_angle(info, info->map[line][i]);
+			get_player_position_and_direction(info, i, line);
 			count++;
 		}
 		i++;

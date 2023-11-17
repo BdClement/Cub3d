@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/15 21:57:00 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:51:40 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int		comas_nb(char *str);
 
 void	init_t_data(t_data *info);
 
+void	init_t_player(t_data *info);
+
 /********************** 0.2/CLEAR ***********************/
 
 // clear.c @Clement
@@ -171,7 +173,6 @@ int		check_incorrect(char *str, char *check);
 
 void	is_player(t_data *info);
 
-// int		get_occurence(char *str);
 int		get_occurence(t_data *info, int line);
 
 void	map_is_open(t_data *info);
@@ -186,7 +187,7 @@ void	check_up(t_data *info, int line, int position);
 
 void	check_down(t_data *info, int line, int position);
 
-void	get_rotation_angle(t_data *info, char player);
+void	get_player_position_and_direction(t_data *info, int x, int y);
 
 /********************* WINDOW ********************************/
 
@@ -202,16 +203,30 @@ int		key_press(int keycode, t_data *info);
 
 /********************* DISPLAY ********************************/
 
-void	draw_tile(t_data *info, int line, int pos);
-
+// display_1.c
 int		draw(t_data *info);
-
-int		get_color(char position);
-
-void		display2d_map(t_data *info);
 
 void	display_player(t_data *info);
 
+void	display_rotation_angle_line(t_data *info);
+
+void	display2d_map(t_data *info);
+
+// display_2.c
+int		get_color(char position);
+
+void	draw_tile(t_data *info, int line, int pos);
+
 void	draw_line(t_data *data, int x0, int y0, int x1, int y1);
+
+/********************* MOVE ********************************/
+// move.c
+void	wall_collision(t_data *info, float new_x, float new_y);
+
+int		wall_collision_x(t_data *info, float x);
+
+int		wall_collision_y(t_data *info, float y);
+
+void	move_player(t_data *info);
 
 #endif

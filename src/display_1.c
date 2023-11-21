@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:45:42 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/17 18:50:28 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:04:48 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	draw(t_data *info)
 	display2d_map(info);
 	display_player(info);
 	display_rotation_angle_line(info);
+	raycasting(info);
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 	return (0);
 }
@@ -51,7 +52,7 @@ void	display_rotation_angle_line(t_data *info)
 
 	x_line = info->player.x + cos(info->player.rotationAngle) * 100;
 	y_line = info->player.y + sin(info->player.rotationAngle) * 100;
-	draw_line(info, info->player.x, info->player.y, x_line, y_line);
+	draw_line(info, info->player.x, info->player.y, x_line, y_line, 0x00E41E07);
 }
 
 void	display2d_map(t_data *info)

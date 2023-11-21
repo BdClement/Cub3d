@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/17 18:51:40 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:30:26 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define PLAYER_SIZE 10
 
 // * DeltaTime pour la fluidite ?
-// # define FOV 60 * (M_PI / 180)
-// # define NB_RAYS ?
+# define FOV 60 * (M_PI / 180)
+# define NB_RAYS WINDOW_WIDTH // ??
 
 # define FRONT 119
 # define BACK 115
@@ -40,6 +40,17 @@
 # define RIGHT 100
 # define R_LEFT 65361
 # define R_RIGHT 65363
+
+typedef struct s_ray{
+	float	angle;
+	float	wall_hit_x;
+	float	wall_hit_y;
+	//int		hit_is_vertical;
+	int		is_facing_up;
+	int		is_facing_right;
+	//int		wall_hit_content;
+	float	distance_from_player;
+}			t_ray;
 
 typedef struct s_player{
 	float	x;
@@ -73,6 +84,7 @@ typedef struct s_data{
 	void		*win;
 	t_imge		img;
 	t_player	player;
+	t_ray		rays[NB_RAYS];
 }				t_data;
 
 /********************* 0.0/UTILS ********************************/
@@ -217,10 +229,13 @@ int		get_color(char position);
 
 void	draw_tile(t_data *info, int line, int pos);
 
-void	draw_line(t_data *data, int x0, int y0, int x1, int y1);
+void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 
 /********************* MOVE ********************************/
 // move.c
+
+int		intersect_collision(t_data *info, int i, float x, float y);
+
 void	wall_collision(t_data *info, float new_x, float new_y);
 
 int		wall_collision_x(t_data *info, float x);
@@ -228,5 +243,23 @@ int		wall_collision_x(t_data *info, float x);
 int		wall_collision_y(t_data *info, float y);
 
 void	move_player(t_data *info);
+
+/********************* RAYCASTING ********************************/
+
+// ray_1.c
+
+void	raycasting(t_data *info);
+
+void	cast_one_ray(t_data *info, int i);
+
+void	get_horizontal_distance(t_data *info, int i);
+
+void	get_vertical_distance(t_data *info, int i);
+
+void	set_ray(t_data *info, int i);
+
+float	get_distance(t_data *info, float x, float y);
+
+float	normalize_angle(float angle);
 
 #endif

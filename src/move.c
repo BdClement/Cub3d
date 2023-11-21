@@ -6,11 +6,21 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:14:15 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/17 18:49:51 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:10:37 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+int	intersect_collision(t_data *info, int i, float x, float y)
+{
+	(void)i;
+	if (info->map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] == '1')
+		return (1);
+	else
+		return (0);
+}
+
 
 int	wall_collision_x(t_data *info, float x)
 {

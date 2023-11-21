@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:31:36 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/17 14:40:37 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:11:23 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ void	get_player_position_and_direction(t_data *info, int x, int y)
 {
 	info->player.x = x * TILE_SIZE + (TILE_SIZE / 2);
 	info->player.y = y * TILE_SIZE + (TILE_SIZE / 2);
-	if (info->map[y][x] == 'W')
+	if (info->map[y][x] == 'E')
 		info->player.rotationAngle = 0;
 	else if (info->map[y][x] == 'S')
 		info->player.rotationAngle = 90 * (M_PI / 180);
-	else if (info->map[y][x] == 'E')
+	else if (info->map[y][x] == 'W')
 		info->player.rotationAngle = 180 * (M_PI / 180);
 	else if (info->map[y][x] == 'N')
 		info->player.rotationAngle = 270 * (M_PI / 180);
 	info->map[y][x] = '0';
+	printf("rotAngle = %2f\n", info->player.rotationAngle);
 }

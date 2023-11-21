@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:15:28 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/17 18:40:45 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/21 19:05:00 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_tile(t_data *info, int line, int pos)
 	}
 }
 
-void draw_line(t_data *data, int x0, int y0, int x1, int y1)
+void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
 {
     int dx = abs(x1 - x0);
     int dy = abs(y1 - y0);
@@ -58,7 +58,7 @@ void draw_line(t_data *data, int x0, int y0, int x1, int y1)
 
     while (1)
     {
-        my_mlx_pixel_put(&data->img, x0, y0, 0x00E41E07);
+        my_mlx_pixel_put(&data->img, x0, y0, color);
 
         if (x0 == x1 && y0 == y1)
             break;

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:45:42 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/21 19:04:48 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:25:26 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 int	draw(t_data *info)
 {
 	move_player(info);
-	display2d_map(info);
-	display_player(info);
-	display_rotation_angle_line(info);
+	// display2d_map(info);
+	// display_player(info);
+	// display_rotation_angle_line(info);
 	raycasting(info);
+	display_walls(info);
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 	return (0);
 }

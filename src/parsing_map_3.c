@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:31:36 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/21 18:11:23 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:51:03 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	get_player_position_and_direction(t_data *info, int x, int y)
 	else if (info->map[y][x] == 'N')
 		info->player.rotationAngle = 270 * (M_PI / 180);
 	info->map[y][x] = '0';
-	printf("rotAngle = %2f\n", info->player.rotationAngle);
+
 }

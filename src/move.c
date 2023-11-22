@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:14:15 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/22 17:02:25 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:57:57 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,14 @@
 int	intersect_collision(t_data *info, int i, float x, float y)
 {
 	(void)i;
-	// if (i == 2303)
-	// 	printf("[x: %d, y:%d]\n", (int)x / TILE_SIZE, (int)y / TILE_SIZE);
-	if (info->map[(int)y / TILE_SIZE][(int)x / TILE_SIZE] == '1')
+	int	y_map;
+	int	x_map;
+	// Protection ne marche pas
+	y_map = (int)y / TILE_SIZE;
+	x_map = (int)x / TILE_SIZE;
+	if (y_map > get_len_tab(info->map) || x_map > (int)ft_strlen(info->map[0]))
+		return (0);
+	if (info->map[y_map][x_map] == '1')
 		return (1);
 	else
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:04:48 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/22 15:16:50 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:25:01 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	cast_one_ray(t_data *info, int i)
 	set_ray(info, i);
 	get_horizontal_distance(info, i);
 	get_vertical_distance(info, i);
-	draw_line(info, info->player.x, info->player.y, info->rays[i].wall_hit_x, info->rays[i].wall_hit_y, 0x00D8BE16);
+	// draw_line(info, info->player.x, info->player.y, info->rays[i].wall_hit_x, info->rays[i].wall_hit_y, 0x00D8BE16);
 }
 
 // HORIZONTAL

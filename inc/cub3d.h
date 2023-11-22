@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/22 16:40:46 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:53:00 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,10 @@ int		get_color(char position);
 void	draw_tile(t_data *info, int line, int pos);
 
 void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
+
+void	display_per_ray(t_data *info, int ray_index, float wall_height);
+
+void	display_walls(t_data *info);
 
 /********************* MOVE ********************************/
 // move.c

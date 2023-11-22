@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 17:50:49 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/14 16:06:05 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:00:34 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	parsing_is_ok(char *arg, t_data *info)
 	is_existing_file(arg);
 	info->file = get_file_content(arg);
 	parsing(info);
+	resize_map(info);
 }
 
 // This function checks if map format is .cub or not

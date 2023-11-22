@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/21 19:30:26 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:40:46 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,10 @@ int		last_4_chars(char *arg);
 /********************* 2.0/PRE-PARSING *****************************/
 
 void	is_existing_file(char *str);
+
+void	resize_map(t_data *info);
+
+int		get_len_max(char **map);
 
 /********************* PARSING ********************************/
 

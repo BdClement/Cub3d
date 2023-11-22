@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:04:48 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/21 19:53:58 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:16:50 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ void	cast_one_ray(t_data *info, int i)
 {
 	set_ray(info, i);
 	get_horizontal_distance(info, i);
-	//get_vertical_distance(info, i);
-	//draw_line(info, info->player.x, info->player.y, info->rays[i].wall_hit_x, info->rays[i].wall_hit_y);
+	get_vertical_distance(info, i);
+	draw_line(info, info->player.x, info->player.y, info->rays[i].wall_hit_x, info->rays[i].wall_hit_y, 0x00D8BE16);
 }
+
+// HORIZONTAL
 
 void	get_horizontal_distance(t_data *info, int i)
 {
@@ -50,6 +52,7 @@ void	get_horizontal_distance(t_data *info, int i)
 		info->rays[i].distance_from_player = -1;
 		return ;
 	}
+	// Find Delta
 	xstep = TILE_SIZE / tan(info->rays[i].angle);
 	if (!info->rays[i].is_facing_right && xstep > 0)
 		xstep *= -1;
@@ -59,6 +62,7 @@ void	get_horizontal_distance(t_data *info, int i)
 		ystep = TILE_SIZE;
 	else
 		ystep = -TILE_SIZE;
+	// Loop while wall
 	while ((x_intersect >= 0 && x_intersect <= WINDOW_WIDTH)
 		&& (y_intersect >= 0 && y_intersect <= WINDOW_HEIGHT))
 	{
@@ -74,31 +78,63 @@ void	get_horizontal_distance(t_data *info, int i)
 	info->rays[i].distance_from_player = get_distance(info,
 			info->rays[i].wall_hit_x,
 			info->rays[i].wall_hit_y);
-	draw_line(info, info->player.x, info->player.y, x_intersect, y_intersect, 0x003C59EB);
+	//draw_line(info, info->player.x, info->player.y, x_intersect, y_intersect, 0x003C59EB);
 }
+
+// VERTICAL
 
 void	get_vertical_distance(t_data *info, int i)
 {
 	float	vertical_d;
 	float	x_intersect;
 	float	y_intersect;
+	float	xstep;
+	float	ystep;
+	int		is_left;
 
+	// Find 1st intersect
 	x_intersect = floor(info->player.x / TILE_SIZE) * TILE_SIZE;
 	if (info->rays[i].is_facing_right)
 		x_intersect += TILE_SIZE;
 	y_intersect = ((x_intersect - info->player.x) * tan(info->rays[i].angle)) + info->player.y;
 	if (!(y_intersect >= 0 && y_intersect < WINDOW_HEIGHT))
 		return ;
-	draw_line(info, info->player.x, info->player.y, x_intersect, y_intersect, 0x00099D09);
+	// Find Delta
+	ystep = TILE_SIZE * tan(info->rays[i].angle);
+	if (info->rays[i].is_facing_up && ystep > 0)
+		ystep *= -1;
+	else if ((!info->rays[i].is_facing_up && ystep < 0))
+		ystep *= -1;
+	if (info->rays[i].is_facing_right)
+		xstep = TILE_SIZE;
+	else
+		xstep = -TILE_SIZE;
+	if (info->rays[i].is_facing_right)
+		is_left = 0;
+	else
+		is_left = 1;
+	while ((x_intersect >= 0 && x_intersect <= WINDOW_WIDTH)
+		&& (y_intersect >= 0 && y_intersect <= WINDOW_HEIGHT))
+	{
+		if (intersect_collision(info, i, x_intersect - is_left, y_intersect))
+			break ;
+		x_intersect += xstep;
+		y_intersect += ystep;
+	}
 	// comparaison a la fin des distances
+	// if (i == 2303)
+	// 	printf("[x: %2f, y:%2f]\n", x_intersect, y_intersect);
 	vertical_d = get_distance(info, x_intersect, y_intersect);
-	// if (vertical_d < info->rays[i].distance_from_player
-	// 	|| info->rays[i].distance_from_player == -1)
-	// {
-	// 	info->rays[i].distance_from_player = vertical_d;
-	// 	info->rays[i].wall_hit_x = x;
-	// 	info->rays[i].wall_hit_y = y;
-	// }
+	if (vertical_d < info->rays[i].distance_from_player
+		|| info->rays[i].distance_from_player == -1)
+	{
+		info->rays[i].distance_from_player = vertical_d;
+		info->rays[i].wall_hit_x = x_intersect;
+		info->rays[i].wall_hit_y = y_intersect;
+	}
+	// if ((x_intersect >= 0 && x_intersect <= WINDOW_WIDTH)
+	// 	&& (y_intersect >= 0 && y_intersect <= WINDOW_HEIGHT))
+	// 	draw_line(info, info->player.x, info->player.y, x_intersect, y_intersect, 0x00099D09);
 }
 
 float	get_distance(t_data *info, float x, float y)

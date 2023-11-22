@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_parsing_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:35:35 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:36:06 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:59:44 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,57 @@ void	is_existing_file(char *str)
 		if (close(fd) < 0)
 			exit(EXIT_FAILURE);
 	}
+}
+
+int	get_len_max(char **map)
+{
+	int	max_len;
+	int	i;
+
+	i = 0;
+	max_len = 0;
+	while (map[i])
+	{
+		if ((int)ft_strlen(map[i]) > max_len)
+			max_len = ft_strlen(map[i]);
+		i++;
+	}
+	return (max_len);
+}
+
+void	resize_map(t_data *info)
+{
+	char	**map_copy;
+	int		len_tab;
+	int		len_max_in_tab;
+	int		i;
+	int		j;
+
+	i = 0;
+	map_copy = NULL;
+	len_tab = get_len_tab(info->map);
+	len_max_in_tab = get_len_max(info->map);
+	map_copy = malloc(sizeof(char *) * (len_tab + 1));
+	if (map_copy == NULL)
+		return ;
+	while (i < len_tab)
+	{
+		j = 0;
+		map_copy[i] = malloc(sizeof(char) * (len_max_in_tab + 1));
+		if (map_copy[i] == NULL)
+			return ;
+		while (j < len_max_in_tab)
+		{
+			if (j < (int)ft_strlen(info->map[i]))
+				map_copy[i][j] = info->map[i][j];
+			else
+				map_copy[i][j] = '1';
+			j++;
+		}
+		map_copy[i][j] = '\0';
+		i++;
+	}
+	map_copy[i] = NULL;
+	free_tab(info->map);
+	info->map = map_copy;
 }

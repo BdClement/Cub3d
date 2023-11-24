@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:15:28 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/22 20:49:41 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:15:31 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	display_per_ray(t_data *info, int x, float wall_height)
 	y = 0;
 	start = (WINDOW_HEIGHT / 2) - (wall_height / 2);
 	end = start + wall_height;
-	// printf("start %2f  end %2f", start, end);
+	// printf("start %2f  end %2f\n", start, end);
 	while (y < WINDOW_HEIGHT)
 	{
 		if (y >= start && y < end)
@@ -79,7 +79,7 @@ void	display_walls(t_data *info)
 	{
 		// calcul de la distance du joueur au plan de projection
 		d_player_to_plane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
-	// 	// calcul de la taille du mur
+		// calcul de la taille du mur
 		wall_height = (TILE_SIZE / info->rays[i].distance_from_player) * d_player_to_plane;
 		display_per_ray(info, i, wall_height);
 		i++;

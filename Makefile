@@ -6,7 +6,7 @@
 #    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/21 13:35:40 by clbernar         ###   ########.fr        #
+#    Updated: 2023/11/24 19:15:19 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ SRCS =			$(SRC_DIR)/main.c \
 				$(SRC_DIR)/display_1.c\
 				$(SRC_DIR)/display_2.c\
 				$(SRC_DIR)/move.c\
-				$(SRC_DIR)/ray_1.c\
+				$(SRC_DIR)/rays.c\
+				$(SRC_DIR)/ray_vertical.c\
+				$(SRC_DIR)/ray_horizontal.c\
 
 LIBFTDIR = 		./libft
 

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/22 20:53:00 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:27:12 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../minilibx-linux/mlx_int.h"
 # include <errno.h>
 # include <math.h>
+# include <limits.h>
 
 # define VALID_CHARS " 01NSWE"
 
@@ -43,13 +44,21 @@
 
 typedef struct s_ray{
 	float	angle;
-	float	wall_hit_x;
-	float	wall_hit_y;
-	//int		hit_is_vertical;
 	int		is_facing_up;
 	int		is_facing_right;
-	//int		wall_hit_content;
+	float	x_intersect;
+	float	y_intersect;
+	float	xstep;
+	float	ystep;
+	float	wall_hit_x;
+	float	wall_hit_y;
 	float	distance_from_player;
+	float	horiz_hit_x;
+	float	horiz_hit_y;
+	float	horiz_distance;
+	float	vert_hit_x;
+	float	vert_hit_y;
+	float	vert_distance;
 }			t_ray;
 
 typedef struct s_player{
@@ -65,10 +74,13 @@ typedef struct s_player{
 
 typedef struct s_imge {
 	void	*img;
+	//void	*img2;
 	char	*addr;
+	//char	*addr2;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		swap;
 }				t_imge;
 
 typedef struct s_data{
@@ -83,6 +95,7 @@ typedef struct s_data{
 	void		*mlx;
 	void		*win;
 	t_imge		img;
+	t_imge		img2;
 	t_player	player;
 	t_ray		rays[NB_RAYS];
 }				t_data;
@@ -222,6 +235,8 @@ int		key_press(int keycode, t_data *info);
 // display_1.c
 int		draw(t_data *info);
 
+void	img_swap(t_data *info);
+
 void	display_player(t_data *info);
 
 void	display_rotation_angle_line(t_data *info);
@@ -254,20 +269,36 @@ void	move_player(t_data *info);
 
 /********************* RAYCASTING ********************************/
 
-// ray_1.c
+// rays.c
 
 void	raycasting(t_data *info);
-
-void	cast_one_ray(t_data *info, int i);
-
-void	get_horizontal_distance(t_data *info, int i);
-
-void	get_vertical_distance(t_data *info, int i);
 
 void	set_ray(t_data *info, int i);
 
 float	get_distance(t_data *info, float x, float y);
 
 float	normalize_angle(float angle);
+
+void	get_distance_from_player(t_data *info, int i);
+
+// horizontal.c
+
+void	find_first_horiz_intersect(t_data *info, int i);
+
+void	find_horiz_delta(t_data *info, int i);
+
+void	find_horiz_wall_hit(t_data *info, int i);
+
+void	get_horizontal_distance(t_data *info, int i);
+
+// vertical.c
+
+void	find_first_vert_intersect(t_data *info, int i);
+
+void	find_vert_delta(t_data *info, int i);
+
+void	find_vert_wall_hit(t_data *info, int i, int is_left);
+
+void	get_vertical_distance(t_data *info, int i);
 
 #endif

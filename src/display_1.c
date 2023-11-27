@@ -6,20 +6,35 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:45:42 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 19:19:12 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:27:17 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
+// 1111111111111111111111111111111
+// 10000000000000000000000000000001
+// 10110000011000000001110000000001
+// 100000000000000000000000N0000001
+// 1111111111101100001100000000011
+// 100000100001100001110011100001
+// 111011100011110110000010010001
+// 100000000000000100000100000001111111
+// 10000111110000010000000000000011111
+// 100000000000011011101000000011
+// 10000000000001000111110000001
+// 100000010000010101   10000011
+// 100010000000000000111100000011
+// 1111 111111111111111111111111111
+
 int	draw(t_data *info)
 {
 	move_player(info);
-	display2d_map(info);
-	display_player(info);
-	display_rotation_angle_line(info);
+	// display2d_map(info);
+	// display_player(info);
+	// display_rotation_angle_line(info);
 	raycasting(info);
-	// display_walls(info);
+	display_walls(info);
 	mlx_put_image_to_window(info->mlx, info->win, info->img.img, 0, 0);
 	img_swap(info);
 	return (0);
@@ -29,17 +44,9 @@ void	img_swap(t_data *info)
 {
 	t_imge	tmp;
 
-	// tmp = info->img.img;
-	// info->img.img = info->img.img2;
-	// info->img.img2 = tmp;
-	// tmp = info->img.addr;
-	// info->img.addr = info->img.addr2;
-	// info->img.addr2 = tmp;
-	//printf("[addr1: %s, addr2: %s]\n", info->img.addr, info->img.addr2);
 	tmp = info->img;
 	info->img = info->img2;
 	info->img2 = tmp;
-	// printf("[img.swap: %d]\n", info->img.swap);
 }
 
 void	display_player(t_data *info)
@@ -66,8 +73,8 @@ void	display_player(t_data *info)
 
 void	display_rotation_angle_line(t_data *info)
 {
-	float	x_line;
-	float	y_line;
+	double	x_line;
+	double	y_line;
 
 	x_line = info->player.x + cos(info->player.rotationAngle) * 100;
 	y_line = info->player.y + sin(info->player.rotationAngle) * 100;

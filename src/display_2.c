@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:15:28 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 17:15:31 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:44:01 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@ int	get_color(char position)
 		|| position == 'E' || position == 'N' || position == 'S')
 		return (0x00ffffff);
 	return (0);
+}
+
+int	get_color_hexa(int *color)
+{
+	int	color_hexa;
+	int	alpha;
+
+	alpha = 0x00;
+	color_hexa = 0;
+	color_hexa = (alpha << 24) | (color[0] << 16) | (color[1] << 8) | color[2];
+	return (color_hexa);
 }
 
 // Rescale si on veut faire minimap
@@ -48,22 +59,29 @@ void	draw_tile(t_data *info, int line, int pos)
 	}
 }
 
-void	display_per_ray(t_data *info, int x, float wall_height)
+void	display_per_ray(t_data *info, int x)
 {
 	int		y;
-	float	start;
-	float	end;
+	double	start;
+	double	end;
 
 	y = 0;
-	start = (WINDOW_HEIGHT / 2) - (wall_height / 2);
-	end = start + wall_height;
-	// printf("start %2f  end %2f\n", start, end);
+	start = (WINDOW_HEIGHT / 2) - (info->rays[x].wall_height / 2);
+	end = start + info->rays[x].wall_height;
+	// calcule le offset x
 	while (y < WINDOW_HEIGHT)
 	{
-		if (y >= start && y < end)
-			my_mlx_pixel_put(&info->img, x, y, 0x00EA891B);
+		// calcule le offset y
+		if (y < start)
+			my_mlx_pixel_put(&info->img, x, y,
+				get_color_hexa(info->ceiling_color));
+		else if (y >= end)
+			my_mlx_pixel_put(&info->img, x, y,
+				get_color_hexa(info->floor_color));
 		else
-			my_mlx_pixel_put(&info->img, x, y, 0x00432503);
+			draw_texture(info, x, y);
+		// else
+		// 	my_mlx_pixel_put(&info->img, x, y, 0x00EA891B);
 		y++;
 	}
 }
@@ -71,8 +89,8 @@ void	display_per_ray(t_data *info, int x, float wall_height)
 void	display_walls(t_data *info)
 {
 	int		i;
-	float	d_player_to_plane;
-	float	wall_height;
+	double	d_player_to_plane;
+	double	wall_height;
 
 	i = 0;
 	while (i < NB_RAYS)
@@ -80,8 +98,8 @@ void	display_walls(t_data *info)
 		// calcul de la distance du joueur au plan de projection
 		d_player_to_plane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
 		// calcul de la taille du mur
-		wall_height = (TILE_SIZE / info->rays[i].distance_from_player) * d_player_to_plane;
-		display_per_ray(info, i, wall_height);
+		info->rays[i].wall_height = (TILE_SIZE / info->rays[i].distance_from_player) * d_player_to_plane;
+		display_per_ray(info, i);
 		i++;
 	}
 }

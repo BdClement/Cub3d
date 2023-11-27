@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 18:33:26 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/17 14:31:49 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:16:36 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,16 @@ int	clear(t_data *info)
 	free_t_data(info);
 	clear_window(info);
 	return (0);
+}
+
+void	destroy_xpm(t_data *info)
+{
+	if (info->textures[NO].img)
+		mlx_destroy_image(info->mlx, info->textures[NO].img);
+	if (info->textures[SO].img)
+		mlx_destroy_image(info->mlx, info->textures[SO].img);
+	if (info->textures[EA].img)
+		mlx_destroy_image(info->mlx, info->textures[EA].img);
+	if (info->textures[WE].img)
+		mlx_destroy_image(info->mlx, info->textures[WE].img);
 }

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:18:26 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 12:47:44 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/27 18:10:37 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	init_t_data(t_data *info)
 	info->ceiling_color[0] = -1;
 	info->mlx = NULL;
 	info->win = NULL;
-	info->img.swap = 0;
-	info->img2.swap = 1;
 	init_t_player(info);
 }
 

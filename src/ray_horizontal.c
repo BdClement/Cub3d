@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   horizontal.c                                       :+:      :+:    :+:   */
+/*   ray_horizontal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:58:15 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 19:13:41 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:33:39 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	find_first_horiz_intersect(t_data *info, int i)
 			/ tan(info->rays[i].angle)) + info->player.x;
 	if (!(info->rays[i].x_intersect >= 0
 			&& info->rays[i].x_intersect < WINDOW_WIDTH))
-		info->rays[i].horiz_distance = (float)INT_MAX;
+		info->rays[i].horiz_distance = (double)INT_MAX;
 }
 
 void	find_horiz_delta(t_data *info, int i)
@@ -59,7 +59,7 @@ void	find_horiz_wall_hit(t_data *info, int i)
 void	get_horizontal_distance(t_data *info, int i)
 {
 	find_first_horiz_intersect(info, i);
-	if (info->rays[i].horiz_distance != (float)INT_MAX)
+	if (info->rays[i].horiz_distance != (double)INT_MAX)
 	{
 		find_horiz_delta(info, i);
 		find_horiz_wall_hit(info, i);
@@ -69,5 +69,5 @@ void	get_horizontal_distance(t_data *info, int i)
 		info->rays[i].horiz_distance = get_distance(info,
 				info->rays[i].x_intersect, info->rays[i].y_intersect);
 	else
-		info->rays[i].horiz_distance = (float)INT_MAX;
+		info->rays[i].horiz_distance = (double)INT_MAX;
 }

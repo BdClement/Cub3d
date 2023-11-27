@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:15:13 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/08 14:15:51 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:33:06 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,19 @@ int	is_number(char *str)
 		i++;
 	}
 	return (1);
+}
+
+void	fixing_fishbowl(t_data *info)
+{
+	int	i;
+	int	correct_distance;
+
+	i = 0;
+	while (i < NB_RAYS)
+	{
+		correct_distance = cos(info->rays[i].angle - info->player.rotationAngle)
+			* info->rays[i].distance_from_player;
+		info->rays[i].distance_from_player = correct_distance;
+		i++;
+	}
 }

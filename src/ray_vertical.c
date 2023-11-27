@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vertical.c                                         :+:      :+:    :+:   */
+/*   ray_vertical.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:58:31 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 19:12:42 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:31:17 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	find_first_vert_intersect(t_data *info, int i)
 			* tan(info->rays[i].angle)) + info->player.y;
 	if (!(info->rays[i].y_intersect >= 0
 			&& info->rays[i].y_intersect < WINDOW_HEIGHT))
-		info->rays[i].vert_distance = (float)INT_MAX;
+		info->rays[i].vert_distance = (double)INT_MAX;
 }
 
 void	find_vert_delta(t_data *info, int i)
@@ -65,7 +65,7 @@ void	get_vertical_distance(t_data *info, int i)
 	else
 		is_left = 1;
 	find_first_vert_intersect(info, i);
-	if (info->rays[i].vert_distance != (float)INT_MAX)
+	if (info->rays[i].vert_distance != (double)INT_MAX)
 	{
 		find_vert_delta(info, i);
 		find_vert_wall_hit(info, i, is_left);
@@ -75,5 +75,5 @@ void	get_vertical_distance(t_data *info, int i)
 		info->rays[i].vert_distance = get_distance(info,
 				info->rays[i].x_intersect, info->rays[i].y_intersect);
 	else
-		info->rays[i].vert_distance = (float)INT_MAX;
+		info->rays[i].vert_distance = (double)INT_MAX;
 }

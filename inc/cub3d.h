@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/24 19:27:12 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:42:11 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,45 +42,51 @@
 # define R_LEFT 65361
 # define R_RIGHT 65363
 
+# define NO 0
+# define SO 1
+# define EA 2
+# define WE 3
+
 typedef struct s_ray{
-	float	angle;
+	double	angle;
+	int		hit_is_vert;
 	int		is_facing_up;
 	int		is_facing_right;
-	float	x_intersect;
-	float	y_intersect;
-	float	xstep;
-	float	ystep;
-	float	wall_hit_x;
-	float	wall_hit_y;
-	float	distance_from_player;
-	float	horiz_hit_x;
-	float	horiz_hit_y;
-	float	horiz_distance;
-	float	vert_hit_x;
-	float	vert_hit_y;
-	float	vert_distance;
+	double	x_intersect;
+	double	y_intersect;
+	double	xstep;
+	double	ystep;
+	double	wall_hit_x;
+	double	wall_hit_y;
+	double	distance_from_player;
+	double	horiz_hit_x;
+	double	horiz_hit_y;
+	double	horiz_distance;
+	double	vert_hit_x;
+	double	vert_hit_y;
+	double	vert_distance;
+	double	wall_height;
 }			t_ray;
 
 typedef struct s_player{
-	float	x;
-	float	y;
+	double	x;
+	double	y;
 	int		turnDirection;// -1 left 1 right
 	int		walkDirection;// -1 back 1 front
 	int		rotateDirection;// -1 r_left 1 r_right
-	float	rotationAngle;
-	float	walkSpeed;//?
-	float	rotationSpeed;
+	double	rotationAngle;
+	double	walkSpeed;//?
+	double	rotationSpeed;
 }			t_player;
 
 typedef struct s_imge {
 	void	*img;
-	//void	*img2;
 	char	*addr;
-	//char	*addr2;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		swap;
+	int		width;
+	int		height;
 }				t_imge;
 
 typedef struct s_data{
@@ -92,6 +98,7 @@ typedef struct s_data{
 	char		*west_texture;
 	int			floor_color[3];
 	int			ceiling_color[3];
+	t_imge		textures[4];
 	void		*mlx;
 	void		*win;
 	t_imge		img;
@@ -120,6 +127,8 @@ int		is_number(char *str);
 
 int		comas_nb(char *str);
 
+void	fixing_fishbowl(t_data *info);
+
 /********************** 0.1/INITIALISATION ***********************/
 
 // init_struct.c @Clement
@@ -135,6 +144,8 @@ void	init_t_player(t_data *info);
 void	free_t_data(t_data *info);
 
 int		clear(t_data *info);
+
+void	destroy_xpm(t_data *info);
 
 /*********************PRE-PARSING*****************************/
 
@@ -246,24 +257,26 @@ void	display2d_map(t_data *info);
 // display_2.c
 int		get_color(char position);
 
+int		get_color_hexa(int *color);
+
 void	draw_tile(t_data *info, int line, int pos);
 
 void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 
-void	display_per_ray(t_data *info, int ray_index, float wall_height);
+void	display_per_ray(t_data *info, int ray_index);
 
 void	display_walls(t_data *info);
 
 /********************* MOVE ********************************/
 // move.c
 
-int		intersect_collision(t_data *info, int i, float x, float y);
+int		intersect_collision(t_data *info, int i, double x, double y);
 
-void	wall_collision(t_data *info, float new_x, float new_y);
+void	wall_collision(t_data *info, double new_x, double new_y);
 
-int		wall_collision_x(t_data *info, float x);
+int		wall_collision_x(t_data *info, double x);
 
-int		wall_collision_y(t_data *info, float y);
+int		wall_collision_y(t_data *info, double y);
 
 void	move_player(t_data *info);
 
@@ -275,9 +288,9 @@ void	raycasting(t_data *info);
 
 void	set_ray(t_data *info, int i);
 
-float	get_distance(t_data *info, float x, float y);
+double	get_distance(t_data *info, double x, double y);
 
-float	normalize_angle(float angle);
+double	normalize_angle(double angle);
 
 void	get_distance_from_player(t_data *info, int i);
 
@@ -300,5 +313,13 @@ void	find_vert_delta(t_data *info, int i);
 void	find_vert_wall_hit(t_data *info, int i, int is_left);
 
 void	get_vertical_distance(t_data *info, int i);
+
+/********************* TEXTURES ********************************/
+
+// textures.c
+
+void	init_textures(t_data *info);
+
+void	get_textures_addresses(t_data *info);
 
 #endif

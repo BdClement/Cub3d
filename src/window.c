@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:28:41 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 17:12:17 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:21:51 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,30 +61,29 @@ void	init_window(t_data *info)
 	info->img.addr = mlx_get_data_addr(info->img.img,
 			&(info->img.bits_per_pixel), &(info->img.line_length),
 			&(info->img.endian));
-	// printf("[addr1: %s]\n", info->img.addr);
-	// info->img.img2 = mlx_new_image(info->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	// info->img.addr2 = mlx_get_data_addr(info->img.img2,
-	// 		&(info->img.bits_per_pixel), &(info->img.line_length),
-	// 		&(info->img.endian));
 	info->img2.img = mlx_new_image(info->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	info->img2.addr = mlx_get_data_addr(info->img2.img,
 			&(info->img2.bits_per_pixel), &(info->img2.line_length),
 			&(info->img2.endian));
-	// printf("[addr2: %s]\n\n", info->img2.addr);
+	init_textures(info);
+	get_textures_addresses(info);
 	mlx_loop_hook(info->mlx, draw, info);
 	mlx_loop(info->mlx);
 }
 
 void	clear_window(t_data *info)
 {
-	// mlx_loop_end(info->mlx);
+	destroy_xpm(info);
 	mlx_destroy_image(info->mlx, info->img.img);
 	mlx_destroy_image(info->mlx, info->img2.img);
 	mlx_destroy_window(info->mlx, info->win);
 	mlx_destroy_display(info->mlx);
 	free(info->mlx);
-	exit(EXIT_SUCCESS);
-	// Tester sinon EXIT_FAILURE
+	if (!info->textures[NO].img || !info->textures[SO].img
+		|| !info->textures[EA].img || !info->textures[WE].img)
+		exit(EXIT_FAILURE);
+	else
+		exit(EXIT_SUCCESS);
 }
 
 void	my_mlx_pixel_put(t_imge *image, int x, int y, int color)

@@ -6,13 +6,13 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:14:15 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 11:57:33 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:30:57 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	intersect_collision(t_data *info, int i, float x, float y)
+int	intersect_collision(t_data *info, int i, double x, double y)
 {
 	(void)i;
 	int	y_map;
@@ -29,7 +29,7 @@ int	intersect_collision(t_data *info, int i, float x, float y)
 }
 
 
-int	wall_collision_x(t_data *info, float x)
+int	wall_collision_x(t_data *info, double x)
 {
 	if (info->map[(int)info->player.y / TILE_SIZE][(int)x / TILE_SIZE] == '1')
 		return (1);
@@ -37,7 +37,7 @@ int	wall_collision_x(t_data *info, float x)
 		return (0);
 }
 
-int	wall_collision_y(t_data *info, float y)
+int	wall_collision_y(t_data *info, double y)
 {
 	if (info->map[(int)y / TILE_SIZE][(int)info->player.x / TILE_SIZE] == '1')
 		return (1);
@@ -45,7 +45,7 @@ int	wall_collision_y(t_data *info, float y)
 		return (0);
 }
 
-void	wall_collision(t_data *info, float new_x, float new_y)
+void	wall_collision(t_data *info, double new_x, double new_y)
 {
 	int	x;
 	int	y;
@@ -61,9 +61,9 @@ void	wall_collision(t_data *info, float new_x, float new_y)
 
 void	move_player(t_data *info)
 {
-	float	new_x;
-	float	new_y;
-	float	move_step;
+	double	new_x;
+	double	new_y;
+	double	move_step;
 
 	move_step = (info->player.walkDirection + info->player.turnDirection)
 		* info->player.walkSpeed;

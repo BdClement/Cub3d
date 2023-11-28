@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:15:28 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/27 19:44:01 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/28 13:36:21 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ void	display_per_ray(t_data *info, int x)
 				get_color_hexa(info->floor_color));
 		else
 			draw_texture(info, x, y);
-		// else
-		// 	my_mlx_pixel_put(&info->img, x, y, 0x00EA891B);
 		y++;
 	}
 }
@@ -90,7 +88,6 @@ void	display_walls(t_data *info)
 {
 	int		i;
 	double	d_player_to_plane;
-	double	wall_height;
 
 	i = 0;
 	while (i < NB_RAYS)

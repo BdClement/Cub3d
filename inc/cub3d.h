@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/27 19:42:11 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:04:33 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -321,5 +321,7 @@ void	get_vertical_distance(t_data *info, int i);
 void	init_textures(t_data *info);
 
 void	get_textures_addresses(t_data *info);
+
+void	draw_texture(t_data *info, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:15:28 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/28 13:36:21 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:21:41 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	draw_tile(t_data *info, int line, int pos)
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-			my_mlx_pixel_put(&info->img, (pos * TILE_SIZE) + j,
-				(line * TILE_SIZE) + i, color);
+			my_mlx_pixel_put(&info->img, ((pos * TILE_SIZE) + j)
+				* SCALE_MINIMAP,
+				((line * TILE_SIZE) + i) * SCALE_MINIMAP, color);
 			j++;
 		}
 		i ++;
@@ -66,12 +67,10 @@ void	display_per_ray(t_data *info, int x)
 	double	end;
 
 	y = 0;
-	start = (WINDOW_HEIGHT / 2) - (info->rays[x].wall_height / 2);
+	start = (info->win_height / 2) - (info->rays[x].wall_height / 2);
 	end = start + info->rays[x].wall_height;
-	// calcule le offset x
-	while (y < WINDOW_HEIGHT)
+	while (y < info->win_height)
 	{
-		// calcule le offset y
 		if (y < start)
 			my_mlx_pixel_put(&info->img, x, y,
 				get_color_hexa(info->ceiling_color));
@@ -90,43 +89,42 @@ void	display_walls(t_data *info)
 	double	d_player_to_plane;
 
 	i = 0;
-	while (i < NB_RAYS)
+	while (i < info->nb_rays)
 	{
-		// calcul de la distance du joueur au plan de projection
-		d_player_to_plane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
-		// calcul de la taille du mur
-		info->rays[i].wall_height = (TILE_SIZE / info->rays[i].distance_from_player) * d_player_to_plane;
+		d_player_to_plane = (info->win_width / 2) / tan(FOV / 2);
+		info->rays[i].wall_height = (TILE_SIZE
+				/ info->rays[i].distance_from_player) * d_player_to_plane;
 		display_per_ray(info, i);
 		i++;
 	}
 }
 
-void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
-{
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = (x0 < x1) ? 1 : -1;
-    int sy = (y0 < y1) ? 1 : -1;
-    int err = dx - dy;
+// void draw_line(t_data *data, int x0, int y0, int x1, int y1, int color)
+// {
+//     int dx = abs(x1 - x0);
+//     int dy = abs(y1 - y0);
+//     int sx = (x0 < x1) ? 1 : -1;
+//     int sy = (y0 < y1) ? 1 : -1;
+//     int err = dx - dy;
 
-    while (1)
-    {
-        my_mlx_pixel_put(&data->img, x0, y0, color);
+//     while (1)
+//     {
+//         my_mlx_pixel_put(&data->img, x0, y0, color);
 
-        if (x0 == x1 && y0 == y1)
-            break;
+//         if (x0 == x1 && y0 == y1)
+//             break;
 
-        int e2 = 2 * err;
-        if (e2 > -dy)
-        {
-            err = err - dy;
-            x0 = x0 + sx;
-        }
+//         int e2 = 2 * err;
+//         if (e2 > -dy)
+//         {
+//             err = err - dy;
+//             x0 = x0 + sx;
+//         }
 
-        if (e2 < dx)
-        {
-            err = err + dx;
-            y0 = y0 + sy;
-        }
-    }
-}
+//         if (e2 < dx)
+//         {
+//             err = err + dx;
+//             y0 = y0 + sy;
+//         }
+//     }
+// }

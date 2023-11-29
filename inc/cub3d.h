@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/28 12:04:33 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:00:19 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,12 @@
 
 # define VALID_CHARS " 01NSWE"
 
-// A definir comme on le souhaite ?
-# define WINDOW_WIDTH 2304
-# define WINDOW_HEIGHT 896
-
 # define TILE_SIZE 64
 # define PLAYER_SIZE 10
+# define SCALE_MINIMAP 0.2
 
-// * DeltaTime pour la fluidite ?
-# define FOV 60 * (M_PI / 180)
-# define NB_RAYS WINDOW_WIDTH // ??
+// # define FOV 60 * (M_PI / 180)
+# define FOV 1.0471975512
 
 # define FRONT 119
 # define BACK 115
@@ -52,6 +48,7 @@ typedef struct s_ray{
 	int		hit_is_vert;
 	int		is_facing_up;
 	int		is_facing_right;
+	int		text_num;
 	double	x_intersect;
 	double	y_intersect;
 	double	xstep;
@@ -71,12 +68,12 @@ typedef struct s_ray{
 typedef struct s_player{
 	double	x;
 	double	y;
-	int		turnDirection;// -1 left 1 right
-	int		walkDirection;// -1 back 1 front
-	int		rotateDirection;// -1 r_left 1 r_right
-	double	rotationAngle;
-	double	walkSpeed;//?
-	double	rotationSpeed;
+	int		turn_direction;
+	int		walk_direction;
+	int		rotate_direction;
+	double	rotation_angle;
+	double	walk_speed;
+	double	rotation_speed;
 }			t_player;
 
 typedef struct s_imge {
@@ -87,6 +84,8 @@ typedef struct s_imge {
 	int		endian;
 	int		width;
 	int		height;
+	double	scalex;
+	double	scaley;
 }				t_imge;
 
 typedef struct s_data{
@@ -104,7 +103,10 @@ typedef struct s_data{
 	t_imge		img;
 	t_imge		img2;
 	t_player	player;
-	t_ray		rays[NB_RAYS];
+	t_ray		*rays;
+	int			nb_rays;
+	int			win_width;
+	int			win_height;
 }				t_data;
 
 /********************* 0.0/UTILS ********************************/
@@ -129,6 +131,8 @@ int		comas_nb(char *str);
 
 void	fixing_fishbowl(t_data *info);
 
+double	get_offset_x(t_data *info, int x);
+
 /********************** 0.1/INITIALISATION ***********************/
 
 // init_struct.c @Clement
@@ -136,6 +140,8 @@ void	fixing_fishbowl(t_data *info);
 void	init_t_data(t_data *info);
 
 void	init_t_player(t_data *info);
+
+void	init_ray(t_data *info, int i);
 
 /********************** 0.2/CLEAR ***********************/
 
@@ -261,7 +267,7 @@ int		get_color_hexa(int *color);
 
 void	draw_tile(t_data *info, int line, int pos);
 
-void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
+// void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
 
 void	display_per_ray(t_data *info, int ray_index);
 
@@ -321,6 +327,8 @@ void	get_vertical_distance(t_data *info, int i);
 void	init_textures(t_data *info);
 
 void	get_textures_addresses(t_data *info);
+
+int		get_texture_num(t_data *info, int x);
 
 void	draw_texture(t_data *info, int x, int y);
 

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:15:13 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/27 12:33:06 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:09:16 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,23 @@ void	fixing_fishbowl(t_data *info)
 	int	correct_distance;
 
 	i = 0;
-	while (i < NB_RAYS)
+	while (i < info->nb_rays)
 	{
-		correct_distance = cos(info->rays[i].angle - info->player.rotationAngle)
+		correct_distance = cos(info->rays[i].angle
+				- info->player.rotation_angle)
 			* info->rays[i].distance_from_player;
 		info->rays[i].distance_from_player = correct_distance;
 		i++;
 	}
+}
+
+double	get_offset_x(t_data *info, int x)
+{
+	double	offset_x;
+
+	if (info->rays[x].hit_is_vert == 1)
+		offset_x = ((int)info->rays[x].wall_hit_y % TILE_SIZE);
+	else
+		offset_x = ((int)info->rays[x].wall_hit_x % TILE_SIZE);
+	return (offset_x);
 }

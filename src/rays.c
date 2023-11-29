@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 18:04:48 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/27 12:34:30 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:06:11 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ void	raycasting(t_data *info)
 	int	i;
 
 	i = 0;
-	while (i < NB_RAYS)
+	while (i < info->nb_rays)
 	{
 		set_ray(info, i);
 		get_horizontal_distance(info, i);
 		get_vertical_distance(info, i);
 		get_distance_from_player(info, i);
-		// draw_line(info, info->player.x, info->player.y, info->rays[i].wall_hit_x, info->rays[i].wall_hit_y, 0x00D8BE16);
 		i++;
 	}
 	fixing_fishbowl(info);
@@ -59,12 +58,12 @@ void	set_ray(t_data *info, int i)
 {
 	if (i == 0)
 	{
-		info->rays[i].angle = info->player.rotationAngle - (FOV / 2);
+		info->rays[i].angle = info->player.rotation_angle - (FOV / 2);
 		info->rays[i].angle = normalize_angle(info->rays[i].angle);
 	}
 	else
 	{
-		info->rays[i].angle = info->rays[i - 1].angle + (FOV / NB_RAYS);
+		info->rays[i].angle = info->rays[i - 1].angle + (FOV / info->nb_rays);
 		info->rays[i].angle = normalize_angle(info->rays[i].angle);
 	}
 	if (info->rays[i].angle >= 0 && info->rays[i].angle < M_PI)
@@ -76,14 +75,7 @@ void	set_ray(t_data *info, int i)
 		info->rays[i].is_facing_right = 0;
 	else
 		info->rays[i].is_facing_right = 1;
-	info->rays[i].horiz_hit_x = 0;
-	info->rays[i].horiz_hit_y = 0;
-	info->rays[i].vert_hit_x = 0;
-	info->rays[i].vert_hit_y = 0;
-	info->rays[i].horiz_distance = 0;
-	info->rays[i].vert_distance = 0;
-	// TEST
-	info->rays[i].hit_is_vert = 0;
+	init_ray(info, i);
 }
 
 double	normalize_angle(double angle)

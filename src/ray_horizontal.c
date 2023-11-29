@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:58:15 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 19:33:39 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:24:45 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	find_first_horiz_intersect(t_data *info, int i)
 	info->rays[i].x_intersect = ((info->rays[i].y_intersect - info->player.y)
 			/ tan(info->rays[i].angle)) + info->player.x;
 	if (!(info->rays[i].x_intersect >= 0
-			&& info->rays[i].x_intersect < WINDOW_WIDTH))
+			&& info->rays[i].x_intersect < info->win_width))
 		info->rays[i].horiz_distance = (double)INT_MAX;
 }
 
@@ -40,9 +40,9 @@ void	find_horiz_delta(t_data *info, int i)
 void	find_horiz_wall_hit(t_data *info, int i)
 {
 	while ((info->rays[i].x_intersect >= 0
-			&& info->rays[i].x_intersect <= WINDOW_WIDTH)
+			&& info->rays[i].x_intersect <= info->win_width)
 		&& (info->rays[i].y_intersect >= 0
-			&& info->rays[i].y_intersect <= WINDOW_HEIGHT))
+			&& info->rays[i].y_intersect <= info->win_height))
 	{
 		if (intersect_collision(info, i, info->rays[i].x_intersect,
 				info->rays[i].y_intersect - info->rays[i].is_facing_up))

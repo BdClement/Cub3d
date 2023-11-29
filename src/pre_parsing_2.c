@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:35:35 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/22 16:59:44 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:39:00 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,14 @@ int	get_len_max(char **map)
 	return (max_len);
 }
 
-void	resize_map(t_data *info)
+void	resize_map_loop(t_data *info, int len_max_in_tab, char **map_copy)
 {
-	char	**map_copy;
-	int		len_tab;
-	int		len_max_in_tab;
-	int		i;
-	int		j;
+	int	i;
+	int	j;
+	int	len_tab;
 
-	i = 0;
-	map_copy = NULL;
 	len_tab = get_len_tab(info->map);
-	len_max_in_tab = get_len_max(info->map);
-	map_copy = malloc(sizeof(char *) * (len_tab + 1));
-	if (map_copy == NULL)
-		return ;
+	i = 0;
 	while (i < len_tab)
 	{
 		j = 0;
@@ -86,7 +79,20 @@ void	resize_map(t_data *info)
 		map_copy[i][j] = '\0';
 		i++;
 	}
-	map_copy[i] = NULL;
+}
+
+void	resize_map(t_data *info)
+{
+	char	**map_copy;
+	int		len_max_in_tab;
+
+	map_copy = NULL;
+	len_max_in_tab = get_len_max(info->map);
+	map_copy = malloc(sizeof(char *) * (get_len_tab(info->map) + 1));
+	if (map_copy == NULL)
+		return ;
+	resize_map_loop(info, len_max_in_tab, map_copy);
+	map_copy[get_len_tab(info->map)] = NULL;
 	free_tab(info->map);
 	info->map = map_copy;
 }

@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 17:06:06 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/08 19:06:39 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:31:39 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	line_format_ok(char **line, t_data *info)
 	if (get_len_tab(line) != 2)
 	{
 		ft_printf("Error.\n");
-		ft_printf("A line only requires element's ID and its inforations.\n");
+		ft_printf("A line only requires element's ID and its informations.\n");
 		free_t_data(info);
 		free_tab(line);
 		exit(EXIT_FAILURE);

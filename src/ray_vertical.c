@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 18:58:31 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/24 20:31:17 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:25:37 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	find_first_vert_intersect(t_data *info, int i)
 	info->rays[i].y_intersect = ((info->rays[i].x_intersect - info->player.x)
 			* tan(info->rays[i].angle)) + info->player.y;
 	if (!(info->rays[i].y_intersect >= 0
-			&& info->rays[i].y_intersect < WINDOW_HEIGHT))
+			&& info->rays[i].y_intersect < info->win_height))
 		info->rays[i].vert_distance = (double)INT_MAX;
 }
 
@@ -40,9 +40,9 @@ void	find_vert_delta(t_data *info, int i)
 void	find_vert_wall_hit(t_data *info, int i, int is_left)
 {
 	while ((info->rays[i].x_intersect >= 0
-			&& info->rays[i].x_intersect <= WINDOW_WIDTH)
+			&& info->rays[i].x_intersect <= info->win_width)
 		&& (info->rays[i].y_intersect >= 0
-			&& info->rays[i].y_intersect <= WINDOW_HEIGHT))
+			&& info->rays[i].y_intersect <= info->win_height))
 	{
 		if (intersect_collision(info, i, info->rays[i].x_intersect - is_left
 				, info->rays[i].y_intersect))

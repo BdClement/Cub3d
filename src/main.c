@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/28 12:04:37 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:33:22 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ int	main(int argc, char **argv)
 		parsing_is_ok(argv[1], &info);
 		init_window(&info);
 	}
-	// Clear par precaution ?
 	return (0);
 }

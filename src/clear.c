@@ -6,7 +6,7 @@
 /*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 18:33:26 by clbernar          #+#    #+#             */
-/*   Updated: 2023/11/27 19:16:36 by clbernar         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:06:58 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	free_t_data(t_data *info)
 		free(info->east_texture);
 	if (info->west_texture != NULL)
 		free(info->west_texture);
+	if (info->rays != NULL)
+		free(info->rays);
 }
 
 int	clear(t_data *info)

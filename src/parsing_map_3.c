@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map_3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 15:31:36 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:32:49 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:07:10 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,21 @@ void	check_down(t_data *info, int line, int position)
 		free_t_data(info);
 		exit(EXIT_FAILURE);
 	}
+}
+
+// Comprendre pourquoi ces degres la donne le comportement voulu
+// N devrait etre 90 ?
+void	get_player_position_and_direction(t_data *info, int x, int y)
+{
+	info->player.x = x * TILE_SIZE + (TILE_SIZE / 2);
+	info->player.y = y * TILE_SIZE + (TILE_SIZE / 2);
+	if (info->map[y][x] == 'E')
+		info->player.rotation_angle = 0;
+	else if (info->map[y][x] == 'S')
+		info->player.rotation_angle = 90 * (M_PI / 180);
+	else if (info->map[y][x] == 'W')
+		info->player.rotation_angle = 180 * (M_PI / 180);
+	else if (info->map[y][x] == 'N')
+		info->player.rotation_angle = 270 * (M_PI / 180);
+	info->map[y][x] = '0';
 }

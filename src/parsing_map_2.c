@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 02:29:37 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:32:34 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:41:02 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	is_player(t_data *info)
 	ret = 0;
 	while (info->map[i] != NULL)
 	{
-		ret += get_occurence(info->map[i]);
+		ret += get_occurence(info, i);
 		i++;
 	}
 	if (ret == 0 || ret > 1)
@@ -65,18 +65,21 @@ void	is_player(t_data *info)
 }
 
 // sous-fonction qui check s'il y a un joueur présent sur une ligne
-int	get_occurence(char *str)
+int	get_occurence(t_data *info, int line)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (str[i] != '\0')
+	while (info->map[line][i] != '\0')
 	{
-		if (str[i] == 'N' || str[i] == 'S'
-			|| str[i] == 'W' || str[i] == 'E')
+		if (info->map[line][i] == 'N' || info->map[line][i] == 'S'
+			|| info->map[line][i] == 'W' || info->map[line][i] == 'E')
+		{
+			get_player_position_and_direction(info, i, line);
 			count++;
+		}
 		i++;
 	}
 	return (count);

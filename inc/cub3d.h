@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:08 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:43:55 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:00:19 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,94 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 # include <errno.h>
+# include <math.h>
+# include <limits.h>
 
 # define VALID_CHARS " 01NSWE"
 
+# define TILE_SIZE 64
+# define PLAYER_SIZE 10
+# define SCALE_MINIMAP 0.2
+
+// # define FOV 60 * (M_PI / 180)
+# define FOV 1.0471975512
+
+# define FRONT 119
+# define BACK 115
+# define LEFT 97
+# define RIGHT 100
+# define R_LEFT 65361
+# define R_RIGHT 65363
+
+# define NO 0
+# define SO 1
+# define EA 2
+# define WE 3
+
+typedef struct s_ray{
+	double	angle;
+	int		hit_is_vert;
+	int		is_facing_up;
+	int		is_facing_right;
+	int		text_num;
+	double	x_intersect;
+	double	y_intersect;
+	double	xstep;
+	double	ystep;
+	double	wall_hit_x;
+	double	wall_hit_y;
+	double	distance_from_player;
+	double	horiz_hit_x;
+	double	horiz_hit_y;
+	double	horiz_distance;
+	double	vert_hit_x;
+	double	vert_hit_y;
+	double	vert_distance;
+	double	wall_height;
+}			t_ray;
+
+typedef struct s_player{
+	double	x;
+	double	y;
+	int		turn_direction;
+	int		walk_direction;
+	int		rotate_direction;
+	double	rotation_angle;
+	double	walk_speed;
+	double	rotation_speed;
+}			t_player;
+
+typedef struct s_imge {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+	double	scalex;
+	double	scaley;
+}				t_imge;
+
 typedef struct s_data{
-	char	**file;
-	char	**map;
-	char	*north_texture;
-	char	*south_texture;
-	char	*east_texture;
-	char	*west_texture;
-	int		floor_color[3];
-	int		ceiling_color[3];
+	char		**file;
+	char		**map;
+	char		*north_texture;
+	char		*south_texture;
+	char		*east_texture;
+	char		*west_texture;
+	int			floor_color[3];
+	int			ceiling_color[3];
+	t_imge		textures[4];
+	void		*mlx;
+	void		*win;
+	t_imge		img;
+	t_imge		img2;
+	t_player	player;
+	t_ray		*rays;
+	int			nb_rays;
+	int			win_width;
+	int			win_height;
 }				t_data;
 
 /********************* 0.0/UTILS ********************************/
@@ -53,17 +129,31 @@ int		is_number(char *str);
 
 int		comas_nb(char *str);
 
+void	fixing_fishbowl(t_data *info);
+
+double	get_offset_x(t_data *info, int x);
+
 /********************** 0.1/INITIALISATION ***********************/
 
 // init_struct.c @Clement
 
 void	init_t_data(t_data *info);
 
+void	init_t_player(t_data *info);
+
+void	init_ray(t_data *info, int i);
+
 /********************** 0.2/CLEAR ***********************/
 
 // clear.c @Clement
 
 void	free_t_data(t_data *info);
+
+int		clear(t_data *info);
+
+void	destroy_xpm(t_data *info);
+
+/*********************PRE-PARSING*****************************/
 
 /********************* 1.0/PRE-PARSING *****************************/
 
@@ -79,9 +169,15 @@ int		get_file_nb_line(char *arg);
 
 int		last_4_chars(char *arg);
 
-// pre_parsing_2.c @Bastien
+/********************* 2.0/PRE-PARSING *****************************/
 
 void	is_existing_file(char *str);
+
+void	resize_map(t_data *info);
+
+int		get_len_max(char **map);
+
+/********************* PARSING ********************************/
 
 /********************* 1.1/PARSING ********************************/
 
@@ -123,7 +219,7 @@ int		check_incorrect(char *str, char *check);
 
 void	is_player(t_data *info);
 
-int		get_occurence(char *str);
+int		get_occurence(t_data *info, int line);
 
 void	map_is_open(t_data *info);
 
@@ -136,5 +232,104 @@ void	check_right(t_data *info, int line, int position);
 void	check_up(t_data *info, int line, int position);
 
 void	check_down(t_data *info, int line, int position);
+
+void	get_player_position_and_direction(t_data *info, int x, int y);
+
+/********************* WINDOW ********************************/
+
+// window.c
+
+void	init_window(t_data *info);
+
+void	clear_window(t_data *info);
+
+void	my_mlx_pixel_put(t_imge *image, int x, int y, int color);
+
+int		key_press(int keycode, t_data *info);
+
+/********************* DISPLAY ********************************/
+
+// display_1.c
+int		draw(t_data *info);
+
+void	img_swap(t_data *info);
+
+void	display_player(t_data *info);
+
+void	display_rotation_angle_line(t_data *info);
+
+void	display2d_map(t_data *info);
+
+// display_2.c
+int		get_color(char position);
+
+int		get_color_hexa(int *color);
+
+void	draw_tile(t_data *info, int line, int pos);
+
+// void	draw_line(t_data *data, int x0, int y0, int x1, int y1, int color);
+
+void	display_per_ray(t_data *info, int ray_index);
+
+void	display_walls(t_data *info);
+
+/********************* MOVE ********************************/
+// move.c
+
+int		intersect_collision(t_data *info, int i, double x, double y);
+
+void	wall_collision(t_data *info, double new_x, double new_y);
+
+int		wall_collision_x(t_data *info, double x);
+
+int		wall_collision_y(t_data *info, double y);
+
+void	move_player(t_data *info);
+
+/********************* RAYCASTING ********************************/
+
+// rays.c
+
+void	raycasting(t_data *info);
+
+void	set_ray(t_data *info, int i);
+
+double	get_distance(t_data *info, double x, double y);
+
+double	normalize_angle(double angle);
+
+void	get_distance_from_player(t_data *info, int i);
+
+// horizontal.c
+
+void	find_first_horiz_intersect(t_data *info, int i);
+
+void	find_horiz_delta(t_data *info, int i);
+
+void	find_horiz_wall_hit(t_data *info, int i);
+
+void	get_horizontal_distance(t_data *info, int i);
+
+// vertical.c
+
+void	find_first_vert_intersect(t_data *info, int i);
+
+void	find_vert_delta(t_data *info, int i);
+
+void	find_vert_wall_hit(t_data *info, int i, int is_left);
+
+void	get_vertical_distance(t_data *info, int i);
+
+/********************* TEXTURES ********************************/
+
+// textures.c
+
+void	init_textures(t_data *info);
+
+void	get_textures_addresses(t_data *info);
+
+int		get_texture_num(t_data *info, int x);
+
+void	draw_texture(t_data *info, int x, int y);
 
 #endif

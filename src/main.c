@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:27:14 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:37:08 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:33:22 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map.cub
+//valgrind --leak-check=full --show-leak-kinds=all  ./cub3d map/test.cub
 
 int	main(int argc, char **argv)
 {
@@ -23,8 +23,7 @@ int	main(int argc, char **argv)
 	{
 		init_t_data(&info);
 		parsing_is_ok(argv[1], &info);
-		ft_printf("TOUT EST CARRE MA GUEULE\n");
-		free_t_data(&info);//tests
+		init_window(&info);
 	}
 	return (0);
 }

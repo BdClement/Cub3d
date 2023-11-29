@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 16:01:44 by bmirlico          #+#    #+#             */
-/*   Updated: 2023/11/10 15:41:01 by bmirlico         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:31:15 by clbernar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	parsing_map(t_data *info, int j)
 	is_incorrect_char(info);
 	is_player(info);
 	map_is_open(info);
-	display_tab(info->map);
 }
 
 void	fill_in_map(t_data *info, int j)

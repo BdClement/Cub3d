@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bmirlico <bmirlico@student.42.fr>          +#+  +:+       +#+         #
+#    By: clbernar <clbernar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/01 12:18:48 by clbernar          #+#    #+#              #
-#    Updated: 2023/11/10 15:35:18 by bmirlico         ###   ########.fr        #
+#    Updated: 2023/11/27 19:26:41 by clbernar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,14 @@ SRCS =			$(SRC_DIR)/main.c \
 				$(SRC_DIR)/parsing_map_3.c\
 				$(SRC_DIR)/init_struct.c\
 				$(SRC_DIR)/clear.c\
+				$(SRC_DIR)/window.c\
+				$(SRC_DIR)/display_1.c\
+				$(SRC_DIR)/display_2.c\
+				$(SRC_DIR)/move.c\
+				$(SRC_DIR)/rays.c\
+				$(SRC_DIR)/ray_vertical.c\
+				$(SRC_DIR)/ray_horizontal.c\
+				$(SRC_DIR)/textures.c\
 
 LIBFTDIR = 		./libft
 
@@ -76,7 +84,7 @@ INC_HD =		-I $(HDIR) -I $(LIBFTDIR)/inc -I $(MLX_DIR)
 all:			$(NAME)
 
 $(NAME):		$(LIBFT) $(MLX) $(OBJS)
-				$(CC) $(CFLAGS) $(INC_HD) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $@
+				$(CC) $(CFLAGS) $(INC_HD) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) -o $@ -lm
 
 $(OBJS):		$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(HD)
 				mkdir -p $(OBJ_DIR)

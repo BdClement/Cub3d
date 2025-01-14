@@ -29,31 +29,30 @@ After checking errors on the argument file, we init the window as expected with 
 ### Raycasting  
 
 Key Data for Raycasting Logic:  
-Each element on the map is represented by a 64x64 tile.
 
-The player's starting position is at the center of a 10x10 tile on the map.  
+- Each element on the map is represented by a 64x64 tile.
+- The player's starting position is at the center of a 10x10 tile on the map.  
 Represented by coordinates: x, y on the map.
-
-Turn Direction:  
+- Turn Direction:  
 -1: Turn left  
 0: Don't turn  
 1: Turn right  
 
-Walk Direction:  
+- Walk Direction:  
 -1: Walk backward  
 0: Don't move  
 1: Move forward  
 
-Rotate Direction:  
+- Rotate Direction:  
 -1: Rotate left  
 0: Don't rotate  
 1: Rotate right  
 
-Rotation Angle (in radians):  
+- Rotation Angle (in radians):  
 0: Player faces the right side  
 π: Player faces the left side  
 
-Field of View (FOV):  
+- Field of View (FOV):  
 Represents a 60° human-like vision.
 
 
@@ -88,6 +87,3 @@ Run executable file ./cub3d with as argument a .cub file reprensenting the map (
 ## 💼 Contributors  
 - [Bastien Mirlicourtois](https://github.com/bmirlico)
 
-
-Check si Build program fonctionne 
-Finish 
